@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/islam/Desktop/hw1/priority_queue.c
+priority_queue.h
+C:/Users/islam/Desktop/hw1/priority_queue.h
+stdlib.h
+-
+assert.h
+-
+stdio.h
+-
+
+C:/Users/islam/Desktop/hw1/priority_queue.h
+stdbool.h
+-
+
