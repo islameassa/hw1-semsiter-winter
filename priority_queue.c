@@ -105,6 +105,23 @@ static PriorityQueueResult addAllOrDestroy(PriorityQueue pq, PriorityQueue pq_to
 }
 */
 
+Set setCopy(Set set) {
+if (set == NULL) {
+return NULL;
+}
+Set newSet = setCreate(set->copy, set->free, set->compare);
+if (newSet == NULL) {
+return NULL;
+}
+if (addAllOrDestroy(newSet, set) == SET_OUT_OF_MEMORY) {
+return NULL;
+}
+newSet->iterator = set->iterator;
+return newSet;
+}
+
+
+
 PriorityQueue pqCopy(PriorityQueue queue)
 {
     if (queue == NULL)
@@ -115,7 +132,7 @@ PriorityQueue pqCopy(PriorityQueue queue)
     PriorityQueue new_pq = pqCreate(queue->copy_element, queue->free_element,
                                     queue->equal_elements, queue->copy_priority, queue->free_priority, queue->compare_priority);
 
-    new_pq->elements
+    
 
         if (new_pq == NULL)
     {
@@ -203,7 +220,7 @@ PriorityQueueResult pqInsert(PriorityQueue queue, PQElement element,
     }
 
     for(int i = 0 ; i < queue->size ; i++){
-    if(new_priority > queue->priorities[i]){
+    if(queue->compare_priority(queue->priorities[i],new_priority) < 0){
        return insertToQueueByIndex(queue,i,new_element,new_priority);
     }
     }
