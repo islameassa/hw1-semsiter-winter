@@ -341,6 +341,24 @@ PriorityQueueResult pqChangePriority(PriorityQueue queue, PQElement element,
     return PQ_SUCCESS;
 }
 
+PriorityQueueResult pqClear(PriorityQueue queue)
+{
+    if (queue == NULL)
+    {
+        return PQ_NULL_ARGUMENT;
+    }
+    PriorityQueue new_queue = pqCreate(queue->copy_element,
+                                       queue->free_element, queue->equal_elements, queue->copy_priority, queue->free_priority, queue->compare_priority);
+
+    if (new_queue == NULL)
+    {
+        return PQ_NULL_ARGUMENT;
+    }
+    pqDestroy(queue);
+    queue = new_queue;
+    return PQ_SUCCESS;
+}
+
 PQElement pqGetFirst(PriorityQueue queue)
 {
     if(queue != NULL)

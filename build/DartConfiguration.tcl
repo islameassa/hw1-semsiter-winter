@@ -4,14 +4,14 @@
 
 
 # Configuration directories and files
-SourceDirectory: C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter
-BuildDirectory: C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/build
+SourceDirectory: C:/Users/islam/Desktop/hw1
+BuildDirectory: C:/Users/islam/Desktop/hw1/build
 
 # Where to place the cost data store
 CostDataFile: 
 
 # Site is something like machine.domain, i.e. pragmatic.crd
-Site: LAPTOP-HIDINQUN
+Site: DESKTOP-0JO2AII
 
 # Build name is osname-revision-compiler, i.e. Linux-2.4.2-2smp-c++
 BuildName: Win32-mingw32-make
@@ -26,7 +26,7 @@ SubmitURL: http://
 NightlyStartTime: 00:00:00 EDT
 
 # Commands for the build/test/submit cycle
-ConfigureCommand: "C:/Program Files/CMake/bin/cmake.exe" "C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter"
+ConfigureCommand: "C:/Program Files/CMake/bin/cmake.exe" "C:/Users/islam/Desktop/hw1"
 MakeCommand: C:/Program\ Files/CMake/bin/cmake.exe --build . --config "${CTEST_CONFIGURATION_TYPE}" -- -i
 DefaultCTestConfigurationType: Release
 
@@ -62,7 +62,7 @@ UpdateOptions:
 UpdateType: git
 
 # Compiler info
-Compiler: C:/GCC/bin/x86_64-w64-mingw32-g++.exe
+Compiler: C:/TDM-GCC-64/bin/g++.exe
 CompilerVersion: 9.2.0
 
 # Dynamic analysis (MemCheck)
@@ -71,8 +71,6 @@ ValgrindCommand:
 ValgrindCommandOptions: 
 DrMemoryCommand: 
 DrMemoryCommandOptions: 
-CudaSanitizerCommand: 
-CudaSanitizerCommandOptions: 
 MemoryCheckType: 
 MemoryCheckSanitizerOptions: 
 MemoryCheckCommand: MEMORYCHECK_COMMAND-NOTFOUND
@@ -80,7 +78,7 @@ MemoryCheckCommandOptions:
 MemoryCheckSuppressionFile: 
 
 # Coverage
-CoverageCommand: C:/GCC/bin/gcov.exe
+CoverageCommand: C:/TDM-GCC-64/bin/gcov.exe
 CoverageExtraFlags: -l
 
 # Cluster commands

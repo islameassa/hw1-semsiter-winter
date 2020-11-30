@@ -6,9 +6,9 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/priority_queue.c
+C:/Users/islam/Desktop/hw1/priority_queue.c
 priority_queue.h
-C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/priority_queue.h
+C:/Users/islam/Desktop/hw1/priority_queue.h
 stdlib.h
 -
 assert.h
@@ -16,7 +16,7 @@ assert.h
 stdio.h
 -
 
-C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/priority_queue.h
+C:/Users/islam/Desktop/hw1/priority_queue.h
 stdbool.h
 -
 
