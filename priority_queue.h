@@ -35,7 +35,8 @@
 typedef struct PriorityQueue_t *PriorityQueue;
 
 /** Type used for returning error codes from priority queue functions */
-typedef enum PriorityQueueResult_t {
+typedef enum PriorityQueueResult_t
+{
     PQ_SUCCESS,
     PQ_OUT_OF_MEMORY,
     PQ_NULL_ARGUMENT,
@@ -51,17 +52,16 @@ typedef void *PQElement;
 typedef void *PQElementPriority;
 
 /** Type of function for copying a data element of the priority queue */
-typedef PQElement(*CopyPQElement)(PQElement);
+typedef PQElement (*CopyPQElement)(PQElement);
 
 /** Type of function for copying a key element of the priority queue */
-typedef PQElementPriority(*CopyPQElementPriority)(PQElementPriority);
+typedef PQElementPriority (*CopyPQElementPriority)(PQElementPriority);
 
 /** Type of function for deallocating a data element of the priority queue */
-typedef void(*FreePQElement)(PQElement);
+typedef void (*FreePQElement)(PQElement);
 
 /** Type of function for deallocating a key element of the priority queue */
-typedef void(*FreePQElementPriority)(PQElementPriority);
-
+typedef void (*FreePQElementPriority)(PQElementPriority);
 
 /**
 * Type of function used by the priority queue to identify equal elements.
@@ -69,8 +69,7 @@ typedef void(*FreePQElementPriority)(PQElementPriority);
 * 		true if they're equal;
 *		false otherwise;
 */
-typedef bool(*EqualPQElements)(PQElement, PQElement);
-
+typedef bool (*EqualPQElements)(PQElement, PQElement);
 
 /**
 * Type of function used by the priority queue to compare priorities.
@@ -79,8 +78,7 @@ typedef bool(*EqualPQElements)(PQElement, PQElement);
 * 		0 if they're equal;
 *		A negative integer if the second element is greater.
 */
-typedef int(*ComparePQElementPriorities)(PQElementPriority, PQElementPriority);
-
+typedef int (*ComparePQElementPriorities)(PQElementPriority, PQElementPriority);
 
 /**
 * pqCreate: Allocates a new empty priority queue.
@@ -260,9 +258,9 @@ PriorityQueueResult pqClear(PriorityQueue queue);
 * Macro for iterating over a priority queue.
 * Declares a new iterator for the loop.
 */
-#define PQ_FOREACH(type, iterator, queue) \
-    for(type iterator = (type) pqGetFirst(queue) ; \
-        iterator ;\
-        iterator = pqGetNext(queue))
+#define PQ_FOREACH(type, iterator, queue)         \
+    for (type iterator = (type)pqGetFirst(queue); \
+         iterator;                                \
+         iterator = pqGetNext(queue))
 
 #endif /* PRIORITY_QUEUE_H_ */

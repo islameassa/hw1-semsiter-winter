@@ -347,8 +347,8 @@ PriorityQueueResult pqClear(PriorityQueue queue)
     {
         return PQ_NULL_ARGUMENT;
     }
-    PriorityQueue new_queue = pqCreate(queue->copy_element,
-                                       queue->free_element, queue->equal_elements, queue->copy_priority, queue->free_priority, queue->compare_priority);
+    PriorityQueue new_queue = pqCreate(queue->copy_element, queue->free_element, queue->equal_elements,
+                                       queue->copy_priority, queue->free_priority, queue->compare_priority);
 
     if (new_queue == NULL)
     {
@@ -361,7 +361,7 @@ PriorityQueueResult pqClear(PriorityQueue queue)
 
 PQElement pqGetFirst(PriorityQueue queue)
 {
-    if(queue != NULL)
+    if (queue == NULL)
     {
         return NULL;
     }
@@ -372,7 +372,7 @@ PQElement pqGetFirst(PriorityQueue queue)
 // Get next set element
 PQElement pqGetNext(PriorityQueue queue)
 {
-    if(queue != NULL)
+    if (queue == NULL)
     {
         return NULL;
     }

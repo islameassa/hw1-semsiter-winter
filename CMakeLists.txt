@@ -1,11 +1,6 @@
 cmake_minimum_required(VERSION 3.0.0)
-project(main.c VERSION 0.1.0)
-
-include(CTest)
-enable_testing()
-
-add_executable(main.c priority_queue.c priority_queue.h)
-
-set(CPACK_PROJECT_NAME ${PROJECT_NAME})
-set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
-include(CPack)
+project(helloworld VERSION 0.1.0 LANGUAGES C CXX)
+set(MTM_FLAGS_DEBUG "-std=c99 --pedantic-errors -Wall -Werror")
+set(MTM_FLAGS_RELEASE "${MTM_FLAGS_DEBUG} -DNDEBUG")
+set(CMAKE_C_FLAGS ${MTM_FLAGS_DEBUG})
+add_executable(my_executable tests/pq_example_tests.c priority_queue.c)
