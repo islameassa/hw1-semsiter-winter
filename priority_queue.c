@@ -71,7 +71,7 @@ PriorityQueue pqCreate(CopyPQElement copy_element, FreePQElement free_element,
         free(pq->elements);
         return NULL;
     }
-    
+
     pq->size = 0;
     pq->iterator = 0;
     pq->maxSize = INITIAL_SIZE;
@@ -131,7 +131,6 @@ PriorityQueue pqCopy(PriorityQueue queue)
     {
         return NULL;
     }
-
     PriorityQueue new_pq = pqCreate(queue->copy_element, queue->free_element,
                                     queue->equal_elements, queue->copy_priority, queue->free_priority, queue->compare_priority);
 
@@ -143,7 +142,8 @@ PriorityQueue pqCopy(PriorityQueue queue)
     {
         return NULL;
     }
-    return PQ_SUCCESS;
+    new_pq->iterator = queue->iterator;
+    return new_pq;
 }
 
 int pqGetSize(PriorityQueue queue)
@@ -283,6 +283,8 @@ static PriorityQueueResult pqRemoveElementByIndex(PriorityQueue queue, int index
     }
 
     queue->size--;
+    queue->iterator = 0;
+
     return PQ_SUCCESS;
 }
 
@@ -337,4 +339,28 @@ PriorityQueueResult pqChangePriority(PriorityQueue queue, PQElement element,
     pqRemoveElementByIndex(queue, index);
     pqInsert(queue, new_element_copy, new_priority_copy);
     return PQ_SUCCESS;
+}
+
+PQElement pqGetFirst(PriorityQueue queue)
+{
+    if(queue != NULL)
+    {
+        return NULL;
+    }
+    queue->iterator = 0;
+    return pqGetNext(queue);
+}
+
+// Get next set element
+PQElement pqGetNext(PriorityQueue queue)
+{
+    if(queue != NULL)
+    {
+        return NULL;
+    }
+    if (queue->iterator >= queue->size)
+    {
+        return NULL;
+    }
+    return queue->elements[queue->iterator++];
 }
