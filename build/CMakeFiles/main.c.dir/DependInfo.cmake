@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "C:/Users/islam/Desktop/hw1/priority_queue.c" "C:/Users/islam/Desktop/hw1/build/CMakeFiles/main.c.dir/priority_queue.c.obj"
+  "C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/priority_queue.c" "C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/build/CMakeFiles/main.c.dir/priority_queue.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

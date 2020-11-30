@@ -25,14 +25,31 @@ struct PriorityQueue_t
     ComparePQElementPriorities compare_priority;
 };
 
+static PriorityQueueResult pqRemoveElementByIndex(PriorityQueue queue, int index);
+
+static PriorityQueueResult addOrDestroy(PriorityQueue pq, PQElement pq_element, PQElementPriority pq_priority);
+
+static PriorityQueueResult addAllOrDestroy(PriorityQueue pq, PriorityQueue pq_toAdd);
+
+static int find(PriorityQueue pq, PQElement element_target);
+
+static int superFind(PriorityQueue pq, PQElement element_target, PQElementPriority priority_target);
+
+static PriorityQueueResult expand(PriorityQueue queue);
+
+static PriorityQueueResult insertToQueueByIndex(PriorityQueue queue,
+                                                int index, PQElement element, PQElementPriority priority);
+
+static PriorityQueueResult pqRemoveElementByIndex(PriorityQueue queue, int index);
+
 PriorityQueue pqCreate(CopyPQElement copy_element, FreePQElement free_element,
                        EqualPQElements equal_elements, CopyPQElementPriority copy_priority,
                        FreePQElementPriority free_priority, ComparePQElementPriorities compare_priority)
 {
 
-    assert(copy_element != NULL && free_element != NULL && equal_elements != NULL && copy_priority != NULL && free_priority != NULL && compare_priority != NULL);
+    assert(copy_element != NULL && free_element != NULL && equal_elements != NULL &&
+           copy_priority != NULL && free_priority != NULL && compare_priority != NULL);
 
-    // ?? sizeof(*pq)?
     PriorityQueue pq = malloc(sizeof(*pq));
 
     if (pq == NULL)
@@ -48,6 +65,13 @@ PriorityQueue pqCreate(CopyPQElement copy_element, FreePQElement free_element,
         free(pq);
         return NULL;
     }
+    if (pq->priorities == NULL)
+    {
+        free(pq);
+        free(pq->elements);
+        return NULL;
+    }
+    
     pq->size = 0;
     pq->iterator = 0;
     pq->maxSize = INITIAL_SIZE;
@@ -63,7 +87,6 @@ PriorityQueue pqCreate(CopyPQElement copy_element, FreePQElement free_element,
     return pq;
 }
 
-// after getfirst and set_remove??
 void pqDestroy(PriorityQueue queue)
 {
     if (queue == NULL)
@@ -72,8 +95,7 @@ void pqDestroy(PriorityQueue queue)
     }
     for (int i = 0; i < queue->size; i++)
     {
-        free(queue->elements[i]);
-        free(queue->priorities[i]);
+        pqRemoveElementByIndex(queue, 0);
     }
 
     free(queue->elements);
@@ -81,13 +103,12 @@ void pqDestroy(PriorityQueue queue)
     free(queue);
 }
 
-/*
-static PriorityQueueResult addOrDestroy(PriorityQueue set, PQElement pq_element)
+static PriorityQueueResult addOrDestroy(PriorityQueue pq, PQElement pq_element, PQElementPriority pq_priority)
 {
-    SetResult result = setAdd(set, element);
-    if (result == SET_OUT_OF_MEMORY)
+    PriorityQueueResult result = pqInsert(pq, pq_element, pq_priority);
+    if (result == PQ_OUT_OF_MEMORY)
     {
-        setDestroy(set);
+        pqDestroy(pq);
     }
     return result;
 }
@@ -96,31 +117,13 @@ static PriorityQueueResult addAllOrDestroy(PriorityQueue pq, PriorityQueue pq_to
 {
     for (int i = 0; i < pq_toAdd->size; ++i)
     {
-        if (addOrDestroy(set, toAdd->elements[i]) == SET_OUT_OF_MEMORY)
+        if (addOrDestroy(pq, pq_toAdd->elements[i], pq_toAdd->priorities[i]) == PQ_OUT_OF_MEMORY)
         {
-            return SET_OUT_OF_MEMORY;
+            return PQ_OUT_OF_MEMORY;
         }
     }
-    return SET_SUCCESS;
+    return PQ_SUCCESS;
 }
-*/
-
-Set setCopy(Set set) {
-if (set == NULL) {
-return NULL;
-}
-Set newSet = setCreate(set->copy, set->free, set->compare);
-if (newSet == NULL) {
-return NULL;
-}
-if (addAllOrDestroy(newSet, set) == SET_OUT_OF_MEMORY) {
-return NULL;
-}
-newSet->iterator = set->iterator;
-return newSet;
-}
-
-
 
 PriorityQueue pqCopy(PriorityQueue queue)
 {
@@ -132,23 +135,15 @@ PriorityQueue pqCopy(PriorityQueue queue)
     PriorityQueue new_pq = pqCreate(queue->copy_element, queue->free_element,
                                     queue->equal_elements, queue->copy_priority, queue->free_priority, queue->compare_priority);
 
-    
-
-        if (new_pq == NULL)
+    if (new_pq == NULL)
     {
         return NULL;
     }
-
-    for (int i = 0; i < queue->size; i++)
-    {
-        new_pq->elements[0] = queue->copy_element(queue->elements[i]);
-    }
-    if (addAllOrDestroy(newSet, set) == SET_OUT_OF_MEMORY)
+    if (addAllOrDestroy(new_pq, queue) == PQ_OUT_OF_MEMORY)
     {
         return NULL;
     }
-    newSet->iterator = set->iterator;
-    return newSet;
+    return PQ_SUCCESS;
 }
 
 int pqGetSize(PriorityQueue queue)
@@ -173,14 +168,16 @@ static int find(PriorityQueue pq, PQElement element_target)
     return ELEMENT_NOT_FOUND;
 }
 
-static int superFind(PriorityQueue pq, PQElement element_target ,PQElementPriority priority_target){
+static int superFind(PriorityQueue pq, PQElement element_target, PQElementPriority priority_target)
+{
     assert(pq != NULL && element_target != NULL && priority_target != NULL);
     for (int i = 0; i < pq->size; i++)
     {
         if (pq->equal_elements(pq->elements[i], element_target))
         {
-            if(pq->compare_priority(pq->priorities[i],priority_target)){
-            return i;
+            if (pq->compare_priority(pq->priorities[i], priority_target))
+            {
+                return i;
             }
         }
     }
@@ -191,7 +188,6 @@ bool pqContains(PriorityQueue queue, PQElement element)
 {
     return find(queue, element) == ELEMENT_NOT_FOUND ? false : true;
 }
-
 
 // putting the big priority first
 PriorityQueueResult pqInsert(PriorityQueue queue, PQElement element,
@@ -215,21 +211,22 @@ PriorityQueueResult pqInsert(PriorityQueue queue, PQElement element,
     PQElementPriority new_priority = queue->copy_priority(priority);
     if (new_priority == NULL)
     {
-        free(new_element);  //   **is this needed ???
+        free(new_element);
         return PQ_OUT_OF_MEMORY;
     }
 
-    for(int i = 0 ; i < queue->size ; i++){
-    if(queue->compare_priority(queue->priorities[i],new_priority) < 0){
-       return insertToQueueByIndex(queue,i,new_element,new_priority);
+    for (int i = 0; i < queue->size; i++)
+    {
+        if (queue->compare_priority(queue->priorities[i], new_priority) < 0)
+        {
+            return insertToQueueByIndex(queue, i, new_element, new_priority);
+        }
     }
-    }
-    
+
     queue->elements[queue->size] = new_element;
     queue->priorities[queue->size++] = new_priority;
     return PQ_SUCCESS;
 }
-
 
 static PriorityQueueResult expand(PriorityQueue queue)
 {
@@ -240,76 +237,90 @@ static PriorityQueueResult expand(PriorityQueue queue)
     {
         return PQ_OUT_OF_MEMORY;
     }
+    PQElementPriority *newPriorities = realloc(queue->priorities, newSize * sizeof(int));
+    if (newPriorities == NULL)
+    {
+        return PQ_OUT_OF_MEMORY;
+        // in this case the user should destroy the queue so we don't free elements.
+    }
+    queue->priorities = newPriorities;
     queue->elements = newElements;
     queue->maxSize = newSize;
     return PQ_SUCCESS;
 }
 
 static PriorityQueueResult insertToQueueByIndex(PriorityQueue queue,
- int index ,PQElement element,PQElementPriority priority){
+                                                int index, PQElement element, PQElementPriority priority)
+{
 
-    assert(queue!=NULL && index>=0);
+    assert(queue != NULL && index >= 0);
     queue->size++;
     if (queue->size == queue->maxSize && expand(queue) == PQ_OUT_OF_MEMORY)
     {
         return PQ_OUT_OF_MEMORY;
     }
-    for(int i = queue->size-1 ; i > index ; i--){
-        queue->elements[i] = queue->elements[i-1];
-        queue->priorities[i] = queue->priorities[i-1]; 
+    for (int i = queue->size - 1; i > index; i--)
+    {
+        queue->elements[i] = queue->elements[i - 1];
+        queue->priorities[i] = queue->priorities[i - 1];
     }
-     queue->elements[index] = element;
-     queue->priorities[index] = priority;   
-     return PQ_SUCCESS;
+    queue->elements[index] = element;
+    queue->priorities[index] = priority;
+    return PQ_SUCCESS;
 }
 
-static PriorityQueueResult pqRemoveElementByIndex(PriorityQueue queue , int index){
-    assert(queue!=NULL && index>=0);
-   
+static PriorityQueueResult pqRemoveElementByIndex(PriorityQueue queue, int index)
+{
+    assert(queue != NULL && index >= 0);
+
     queue->free_element(queue->elements[index]);
     queue->free_priority(queue->priorities[index]);
 
-    for(int i = index ; i < queue->size-1 ; i++){
-        queue->elements[i] = queue->elements[i+1];
-        queue->priorities[i] = queue->priorities[i+1]; 
+    for (int i = index; i < queue->size - 1; i++)
+    {
+        queue->elements[i] = queue->elements[i + 1];
+        queue->priorities[i] = queue->priorities[i + 1];
     }
-  
-  //   queue->free_element(queue->elements[queue->size-1]);    is this needed to free?
-  //   queue->free_priority(queue->priorities[queue->size-1]);
-  
+
     queue->size--;
     return PQ_SUCCESS;
 }
 
-
-PriorityQueueResult pqRemove(PriorityQueue queue){
-    if(queue == NULL){
+PriorityQueueResult pqRemove(PriorityQueue queue)
+{
+    if (queue == NULL)
+    {
         return PQ_NULL_ARGUMENT;
-    } 
-    return pqRemoveElementByIndex(queue,0);
+    }
+    return pqRemoveElementByIndex(queue, 0);
 }
 
-PriorityQueueResult pqRemoveElement(PriorityQueue queue, PQElement element){
-    if(queue == NULL || element == NULL){
+PriorityQueueResult pqRemoveElement(PriorityQueue queue, PQElement element)
+{
+    if (queue == NULL || element == NULL)
+    {
         return PQ_NULL_ARGUMENT;
-    } 
-    if(!pqContains(queue,element)){
+    }
+    if (!pqContains(queue, element))
+    {
         return PQ_ELEMENT_DOES_NOT_EXISTS;
     }
-    int index = find(queue,element); // because they are sorted - the biggest priority element exists in the first element
-    return pqRemoveElementByIndex(queue,index);
+    int index = find(queue, element); // because they are sorted - the biggest priority element exists in the first element
+    return pqRemoveElementByIndex(queue, index);
 }
-
 
 PriorityQueueResult pqChangePriority(PriorityQueue queue, PQElement element,
-PQElementPriority old_priority, PQElementPriority new_priority){
-    if(queue == NULL || element == NULL || old_priority == NULL || new_priority == NULL){
+                                     PQElementPriority old_priority, PQElementPriority new_priority)
+{
+    if (queue == NULL || element == NULL || old_priority == NULL || new_priority == NULL)
+    {
         return PQ_NULL_ARGUMENT;
     }
-    int index = superFind(queue,element,old_priority);
-    if(index == -1){
+    int index = superFind(queue, element, old_priority);
+    if (index == -1)
+    {
         return PQ_ELEMENT_DOES_NOT_EXISTS;
-    }    
+    }
 
     PQElementPriority new_element_copy = queue->copy_element(element);
     if (new_element_copy == NULL)
@@ -323,9 +334,7 @@ PQElementPriority old_priority, PQElementPriority new_priority){
         return PQ_OUT_OF_MEMORY;
     }
 
-    pqRemoveElementByIndex(queue,index);
-    pqInsert(queue,new_element_copy,new_priority_copy);
-    return PQ_SUCCESS;            
+    pqRemoveElementByIndex(queue, index);
+    pqInsert(queue, new_element_copy, new_priority_copy);
+    return PQ_SUCCESS;
 }
-
-
