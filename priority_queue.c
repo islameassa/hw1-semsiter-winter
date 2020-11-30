@@ -40,8 +40,6 @@ static PriorityQueueResult expand(PriorityQueue queue);
 static PriorityQueueResult insertToQueueByIndex(PriorityQueue queue,
                                                 int index, PQElement element, PQElementPriority priority);
 
-static PriorityQueueResult pqRemoveElementByIndex(PriorityQueue queue, int index);
-
 PriorityQueue pqCreate(CopyPQElement copy_element, FreePQElement free_element,
                        EqualPQElements equal_elements, CopyPQElementPriority copy_priority,
                        FreePQElementPriority free_priority, ComparePQElementPriorities compare_priority)
@@ -96,6 +94,7 @@ void pqDestroy(PriorityQueue queue)
     for (int i = 0; i < queue->size; i++)
     {
         pqRemoveElementByIndex(queue, 0);
+        queue->size++;
     }
 
     free(queue->elements);
