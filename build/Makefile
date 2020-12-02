@@ -163,59 +163,86 @@ my_executable/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_executable.dir\build.make CMakeFiles/my_executable.dir/build
 .PHONY : my_executable/fast
 
-priority_queue.obj: priority_queue.c.obj
+date/date.obj: date/date.c.obj
 
-.PHONY : priority_queue.obj
-
-# target to build an object file
-priority_queue.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_executable.dir\build.make CMakeFiles/my_executable.dir/priority_queue.c.obj
-.PHONY : priority_queue.c.obj
-
-priority_queue.i: priority_queue.c.i
-
-.PHONY : priority_queue.i
-
-# target to preprocess a source file
-priority_queue.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_executable.dir\build.make CMakeFiles/my_executable.dir/priority_queue.c.i
-.PHONY : priority_queue.c.i
-
-priority_queue.s: priority_queue.c.s
-
-.PHONY : priority_queue.s
-
-# target to generate assembly for a file
-priority_queue.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_executable.dir\build.make CMakeFiles/my_executable.dir/priority_queue.c.s
-.PHONY : priority_queue.c.s
-
-tests/pq_example_tests.obj: tests/pq_example_tests.c.obj
-
-.PHONY : tests/pq_example_tests.obj
+.PHONY : date/date.obj
 
 # target to build an object file
-tests/pq_example_tests.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_executable.dir\build.make CMakeFiles/my_executable.dir/tests/pq_example_tests.c.obj
-.PHONY : tests/pq_example_tests.c.obj
+date/date.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_executable.dir\build.make CMakeFiles/my_executable.dir/date/date.c.obj
+.PHONY : date/date.c.obj
 
-tests/pq_example_tests.i: tests/pq_example_tests.c.i
+date/date.i: date/date.c.i
 
-.PHONY : tests/pq_example_tests.i
+.PHONY : date/date.i
 
 # target to preprocess a source file
-tests/pq_example_tests.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_executable.dir\build.make CMakeFiles/my_executable.dir/tests/pq_example_tests.c.i
-.PHONY : tests/pq_example_tests.c.i
+date/date.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_executable.dir\build.make CMakeFiles/my_executable.dir/date/date.c.i
+.PHONY : date/date.c.i
 
-tests/pq_example_tests.s: tests/pq_example_tests.c.s
+date/date.s: date/date.c.s
 
-.PHONY : tests/pq_example_tests.s
+.PHONY : date/date.s
 
 # target to generate assembly for a file
-tests/pq_example_tests.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_executable.dir\build.make CMakeFiles/my_executable.dir/tests/pq_example_tests.c.s
-.PHONY : tests/pq_example_tests.c.s
+date/date.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_executable.dir\build.make CMakeFiles/my_executable.dir/date/date.c.s
+.PHONY : date/date.c.s
+
+event_manager.obj: event_manager.c.obj
+
+.PHONY : event_manager.obj
+
+# target to build an object file
+event_manager.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_executable.dir\build.make CMakeFiles/my_executable.dir/event_manager.c.obj
+.PHONY : event_manager.c.obj
+
+event_manager.i: event_manager.c.i
+
+.PHONY : event_manager.i
+
+# target to preprocess a source file
+event_manager.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_executable.dir\build.make CMakeFiles/my_executable.dir/event_manager.c.i
+.PHONY : event_manager.c.i
+
+event_manager.s: event_manager.c.s
+
+.PHONY : event_manager.s
+
+# target to generate assembly for a file
+event_manager.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_executable.dir\build.make CMakeFiles/my_executable.dir/event_manager.c.s
+.PHONY : event_manager.c.s
+
+tests/event_manager_example_tests.obj: tests/event_manager_example_tests.c.obj
+
+.PHONY : tests/event_manager_example_tests.obj
+
+# target to build an object file
+tests/event_manager_example_tests.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_executable.dir\build.make CMakeFiles/my_executable.dir/tests/event_manager_example_tests.c.obj
+.PHONY : tests/event_manager_example_tests.c.obj
+
+tests/event_manager_example_tests.i: tests/event_manager_example_tests.c.i
+
+.PHONY : tests/event_manager_example_tests.i
+
+# target to preprocess a source file
+tests/event_manager_example_tests.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_executable.dir\build.make CMakeFiles/my_executable.dir/tests/event_manager_example_tests.c.i
+.PHONY : tests/event_manager_example_tests.c.i
+
+tests/event_manager_example_tests.s: tests/event_manager_example_tests.c.s
+
+.PHONY : tests/event_manager_example_tests.s
+
+# target to generate assembly for a file
+tests/event_manager_example_tests.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_executable.dir\build.make CMakeFiles/my_executable.dir/tests/event_manager_example_tests.c.s
+.PHONY : tests/event_manager_example_tests.c.s
 
 # Help Target
 help:
@@ -228,12 +255,15 @@ help:
 	@echo ... package_source
 	@echo ... rebuild_cache
 	@echo ... my_executable
-	@echo ... priority_queue.obj
-	@echo ... priority_queue.i
-	@echo ... priority_queue.s
-	@echo ... tests/pq_example_tests.obj
-	@echo ... tests/pq_example_tests.i
-	@echo ... tests/pq_example_tests.s
+	@echo ... date/date.obj
+	@echo ... date/date.i
+	@echo ... date/date.s
+	@echo ... event_manager.obj
+	@echo ... event_manager.i
+	@echo ... event_manager.s
+	@echo ... tests/event_manager_example_tests.obj
+	@echo ... tests/event_manager_example_tests.i
+	@echo ... tests/event_manager_example_tests.s
 .PHONY : help
 
 

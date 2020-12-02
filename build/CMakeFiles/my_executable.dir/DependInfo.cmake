@@ -4,8 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/priority_queue.c" "C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/build/CMakeFiles/my_executable.dir/priority_queue.c.obj"
-  "C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/tests/pq_example_tests.c" "C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/build/CMakeFiles/my_executable.dir/tests/pq_example_tests.c.obj"
+  "C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/date/date.c" "C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/build/CMakeFiles/my_executable.dir/date/date.c.obj"
+  "C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/event_manager.c" "C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/build/CMakeFiles/my_executable.dir/event_manager.c.obj"
+  "C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/tests/event_manager_example_tests.c" "C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/build/CMakeFiles/my_executable.dir/tests/event_manager_example_tests.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 
