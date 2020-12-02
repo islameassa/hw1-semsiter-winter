@@ -175,7 +175,7 @@ static int superFind(PriorityQueue pq, PQElement element_target, PQElementPriori
     {
         if (pq->equal_elements(pq->elements[i], element_target))
         {
-            if (pq->compare_priority(pq->priorities[i], priority_target))
+            if (!pq->compare_priority(pq->priorities[i], priority_target))
             {
                 return i;
             }
@@ -186,6 +186,10 @@ static int superFind(PriorityQueue pq, PQElement element_target, PQElementPriori
 
 bool pqContains(PriorityQueue queue, PQElement element)
 {
+    if (queue == NULL || element == NULL)
+    {
+        return false;
+    }
     return find(queue, element) == ELEMENT_NOT_FOUND ? false : true;
 }
 
@@ -194,7 +198,7 @@ PriorityQueueResult pqInsert(PriorityQueue queue, PQElement element,
                              PQElementPriority priority)
 {
 
-    if (queue == NULL || element == NULL)
+    if (queue == NULL || element == NULL || priority == NULL)
     {
         if (queue != NULL)
         {
@@ -228,19 +232,21 @@ PriorityQueueResult pqInsert(PriorityQueue queue, PQElement element,
         }
     }
 
-    return insertToQueueByIndex(queue, queue->size, new_element, new_priority);
+    queue->elements[queue->size] = new_element;
+    queue->priorities[queue->size++] = new_priority;
+    return PQ_SUCCESS;
 }
 
 static PriorityQueueResult expand(PriorityQueue queue)
 {
     assert(queue != NULL);
     int newSize = EXPAND_FACTOR * queue->maxSize;
-    PQElement *newElements = realloc(queue->elements, newSize * sizeof(int));
+    PQElement *newElements = realloc(queue->elements, newSize * sizeof(PQElement));
     if (newElements == NULL)
     {
         return PQ_OUT_OF_MEMORY;
     }
-    PQElementPriority *newPriorities = realloc(queue->priorities, newSize * sizeof(int));
+    PQElementPriority *newPriorities = realloc(queue->priorities, newSize * sizeof(PQElementPriority));
     if (newPriorities == NULL)
     {
         return PQ_OUT_OF_MEMORY;
@@ -360,15 +366,28 @@ PriorityQueueResult pqClear(PriorityQueue queue)
     {
         return PQ_NULL_ARGUMENT;
     }
-    PriorityQueue new_queue = pqCreate(queue->copy_element, queue->free_element, queue->equal_elements,
-                                       queue->copy_priority, queue->free_priority, queue->compare_priority);
 
-    if (new_queue == NULL)
+    for (int i = 0; i < queue->size; i++)
     {
-        return PQ_NULL_ARGUMENT;
+        pqRemoveElementByIndex(queue, 0);
+        queue->size++;
     }
-    pqDestroy(queue);
-    queue = new_queue;
+
+   /* int newSize = INITIAL_SIZE;
+
+    PQElement *newElements = realloc(queue->elements, newSize * sizeof(PQElement));
+    if (newElements == NULL)
+    {
+        return PQ_OUT_OF_MEMORY;
+    }
+    PQElementPriority *newPriorities = realloc(queue->priorities, newSize * sizeof(PQElementPriority));
+    if (newPriorities == NULL)
+    {
+        return PQ_OUT_OF_MEMORY;
+        // in this case the user should destroy the queue so we don't free elements.
+    }*/
+
+    queue->size = 0;
     return PQ_SUCCESS;
 }
 
