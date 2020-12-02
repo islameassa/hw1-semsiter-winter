@@ -228,9 +228,7 @@ PriorityQueueResult pqInsert(PriorityQueue queue, PQElement element,
         }
     }
 
-    queue->elements[queue->size] = new_element;
-    queue->priorities[queue->size++] = new_priority;
-    return PQ_SUCCESS;
+    return insertToQueueByIndex(queue, queue->size, new_element, new_priority);
 }
 
 static PriorityQueueResult expand(PriorityQueue queue)
