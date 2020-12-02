@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/priority_queue/priority_queue.c
+priority_queue.h
+C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/priority_queue/priority_queue.h
+stdlib.h
+-
+assert.h
+-
+stdio.h
+-
+
+C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/priority_queue/priority_queue.h
+stdbool.h
+-
+

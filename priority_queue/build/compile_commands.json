@@ -1,0 +1,12 @@
+[
+{
+  "directory": "C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/priority_queue/build",
+  "command": "C:\\GCC\\bin\\x86_64-w64-mingw32-gcc.exe   -std=c99 --pedantic-errors -Wall -Werror -g -o CMakeFiles\\my_executable.dir\\mainTest.c.obj -c C:\\Users\\thoma\\OneDrive\\Documents\\GitHub\\hw1-semsiter-winter\\priority_queue\\mainTest.c",
+  "file": "C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/priority_queue/mainTest.c"
+},
+{
+  "directory": "C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/priority_queue/build",
+  "command": "C:\\GCC\\bin\\x86_64-w64-mingw32-gcc.exe   -std=c99 --pedantic-errors -Wall -Werror -g -o CMakeFiles\\my_executable.dir\\priority_queue.c.obj -c C:\\Users\\thoma\\OneDrive\\Documents\\GitHub\\hw1-semsiter-winter\\priority_queue\\priority_queue.c",
+  "file": "C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/priority_queue/priority_queue.c"
+}
+]

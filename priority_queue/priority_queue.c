@@ -71,7 +71,7 @@ PriorityQueue pqCreate(CopyPQElement copy_element, FreePQElement free_element,
     }
 
     pq->size = 0;
-    pq->iterator = 0;
+    pq->iterator = -1;
     pq->maxSize = INITIAL_SIZE;
 
     pq->copy_element = copy_element;
@@ -133,6 +133,7 @@ PriorityQueue pqCopy(PriorityQueue queue)
     PriorityQueue new_pq = pqCreate(queue->copy_element, queue->free_element,
                                     queue->equal_elements, queue->copy_priority, queue->free_priority, queue->compare_priority);
 
+    queue->iterator = -1;
     if (new_pq == NULL)
     {
         return NULL;
@@ -141,7 +142,7 @@ PriorityQueue pqCopy(PriorityQueue queue)
     {
         return NULL;
     }
-    new_pq->iterator = queue->iterator;
+    new_pq->iterator = -1;
     return new_pq;
 }
 
@@ -195,8 +196,13 @@ PriorityQueueResult pqInsert(PriorityQueue queue, PQElement element,
 
     if (queue == NULL || element == NULL)
     {
+        if (queue != NULL)
+        {
+            queue->iterator = -1;
+        }
         return PQ_NULL_ARGUMENT;
     }
+    queue->iterator = -1;
     if (queue->size == queue->maxSize && expand(queue) == PQ_OUT_OF_MEMORY)
     {
         return PQ_OUT_OF_MEMORY;
@@ -282,7 +288,7 @@ static PriorityQueueResult pqRemoveElementByIndex(PriorityQueue queue, int index
     }
 
     queue->size--;
-    queue->iterator = 0;
+    queue->iterator = -1;
 
     return PQ_SUCCESS;
 }
@@ -300,8 +306,13 @@ PriorityQueueResult pqRemoveElement(PriorityQueue queue, PQElement element)
 {
     if (queue == NULL || element == NULL)
     {
+        if (queue != NULL)
+        {
+            queue->iterator = -1;
+        }
         return PQ_NULL_ARGUMENT;
     }
+    queue->iterator = -1;
     if (!pqContains(queue, element))
     {
         return PQ_ELEMENT_DOES_NOT_EXISTS;
@@ -315,8 +326,13 @@ PriorityQueueResult pqChangePriority(PriorityQueue queue, PQElement element,
 {
     if (queue == NULL || element == NULL || old_priority == NULL || new_priority == NULL)
     {
+        if (queue != NULL)
+        {
+            queue->iterator = -1;
+        }
         return PQ_NULL_ARGUMENT;
     }
+    queue->iterator = -1;
     int index = superFind(queue, element, old_priority);
     if (index == -1)
     {
@@ -375,7 +391,7 @@ PQElement pqGetNext(PriorityQueue queue)
     {
         return NULL;
     }
-    if (queue->iterator >= queue->size)
+    if (queue->iterator >= queue->size || queue->iterator < 0)
     {
         return NULL;
     }
