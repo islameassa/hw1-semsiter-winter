@@ -303,6 +303,10 @@ PriorityQueueResult pqRemove(PriorityQueue queue)
     {
         return PQ_NULL_ARGUMENT;
     }
+    if (queue->size == 0)
+    {
+        return PQ_SUCCESS;
+    }
     return pqRemoveElementByIndex(queue, 0);
 }
 
@@ -343,20 +347,8 @@ PriorityQueueResult pqChangePriority(PriorityQueue queue, PQElement element,
         return PQ_ELEMENT_DOES_NOT_EXISTS;
     }
 
-    PQElementPriority new_element_copy = queue->copy_element(element);
-    if (new_element_copy == NULL)
-    {
-        return PQ_OUT_OF_MEMORY;
-    }
-    PQElementPriority new_priority_copy = queue->copy_priority(new_priority);
-    if (new_priority_copy == NULL)
-    {
-        free(new_element_copy);
-        return PQ_OUT_OF_MEMORY;
-    }
-
     pqRemoveElementByIndex(queue, index);
-    pqInsert(queue, new_element_copy, new_priority_copy);
+    pqInsert(queue, element, new_priority);
     return PQ_SUCCESS;
 }
 
