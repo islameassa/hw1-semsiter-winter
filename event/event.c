@@ -96,7 +96,10 @@ static int find(Event event, Member member)
 
 Event eventCreate(int id, char *name)
 {
-    assert(name != NULL);
+    if(name == NULL)
+    {
+        return NULL;
+    }
 
     Event event = malloc(sizeof(*event));
     if (event == NULL)
