@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <stdio.h>
-#define EXPAND_RATE 2
 #define EXPAND_FACTOR 2
 #define INITIAL_SIZE 10
 #define ELEMENT_NOT_FOUND -1
