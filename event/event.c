@@ -70,14 +70,14 @@ static EventResult addAllOrDestroy(Event event, Event event_toAdd)
 static EventResult expand(Event event)
 {
     assert(event != NULL);
-    int newSize = EXPAND_FACTOR * event->members_max_size;
-    Member *newMembers = realloc(event->members, newSize * sizeof(Member));
-    if (newMember == NULL)
+    int new_size = EXPAND_FACTOR * event->members_max_size;
+    Member *new_members = realloc(event->members, new_size * sizeof(Member));
+    if (new_members == NULL)
     {
         return EVENT_OUT_OF_MEMORY;
     }
-    event->members = newMembers;
-    queue->maxSize = newSize;
+    event->members = new_members;
+    queue->max_size = new_size;
     return EVENT_SUCCESS;
 }
 
