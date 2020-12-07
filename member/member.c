@@ -5,35 +5,67 @@
 #include <string.h>
 #include "member.h"
 
+#define MEMBER_NULL_ARGUMENT -1
+#define MEMBERS_NOT_EQUAL 1
+#define MEMBERS_EQUAL 0
+
 struct Member_t
 {
     int id;
     char *name;
 };
 
-Member createMember(int id, char *new_name){
-    assert(new_name != NULL);
+static char *copyString(char *string)
+{
+    char *new_string = malloc(strlen(string) + 1);
+    if (new_string == NULL)
+    {
+        return NULL;
+    }
+    strcpy(new_string, string);
+    return new_string;
+}
+
+Member createMember(int id, char *name)
+{
+    if (name == NULL)
+    {
+        return NULL;
+    }
     Member member = malloc(sizeof(*member));
     if (member == NULL)
     {
         return NULL;
     }
+    char *new_name = copyString(name);
+    if(new_name == NULL)
+    {
+        free(member);
+        return NULL;
+    }
     member->id = id;
     member->name = new_name;
-    
+
     return member;
 }
 
-void memberDestroy(Member member){
+void memberDestroy(Member member)
+{
+    if(member == NULL)
+    {
+        return;
+    }
+    free(member->name);
     free(member);
 }
 
-Member memberCopy(Member member){
+Member memberCopy(Member member)
+{
     if (member == NULL)
     {
         return NULL;
     }
-      
+
     Member new_member = memberCreate(member->id, member->name);
     if (new_member == NULL)
     {
@@ -42,19 +74,25 @@ Member memberCopy(Member member){
     return new_member;
 }
 
-char *memberGetName(Member member){
-    if (member == NULL){
+char *memberGetName(Member member)
+{
+    if (member == NULL)
+    {
         return NULL;
     }
     return member->name;
 }
 
-bool memberCompare(Member member1, Member member2){
- 
-    if (member1 == NULL || member2 == NULL || member1->id != member2->id ||
-        strcmp(member1->name, member2->name) != 0)
+int memberCompare(Member member1, Member member2)
+{
+
+    if (member1 == NULL || member2 == NULL)
     {
-        return false;
+        return MEMBER_NULL_ARGUMENT;
     }
-    return true; 
+    if(member1->id == member2->id)
+    {
+        return MEMBERS_EQUAL;
+    }
+    return MEMBERS_NOT_EQUAL;
 }

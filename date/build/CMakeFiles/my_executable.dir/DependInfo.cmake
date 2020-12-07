@@ -5,7 +5,6 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
   "C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/date/date.c" "C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/date/build/CMakeFiles/my_executable.dir/date.c.obj"
-  "C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/date/dateTest.c" "C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/date/build/CMakeFiles/my_executable.dir/dateTest.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

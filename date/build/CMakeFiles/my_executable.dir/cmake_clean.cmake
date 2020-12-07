@@ -1,6 +1,5 @@
 file(REMOVE_RECURSE
   "CMakeFiles/my_executable.dir/date.c.obj"
-  "CMakeFiles/my_executable.dir/dateTest.c.obj"
   "libmy_executable.dll.a"
   "my_executable.exe"
   "my_executable.exe.manifest"

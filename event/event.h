@@ -2,7 +2,7 @@
 #define EVENT_H_
 
 #include <stdbool.h>
-#include "member.h"
+#include "../member/member.h"
 
 /**
 * Event

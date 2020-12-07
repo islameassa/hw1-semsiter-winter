@@ -12,7 +12,7 @@ struct PriorityQueue_t
     PQElement *elements;
     PQElementPriority *priorities;
     int size;
-    int maxSize;
+    int max_size;
     int iterator;
 
     CopyPQElement copy_element;
@@ -71,7 +71,7 @@ PriorityQueue pqCreate(CopyPQElement copy_element, FreePQElement free_element,
 
     pq->size = 0;
     pq->iterator = -1;
-    pq->maxSize = INITIAL_SIZE;
+    pq->max_size = INITIAL_SIZE;
 
     pq->copy_element = copy_element;
     pq->free_element = free_element;
@@ -129,8 +129,8 @@ PriorityQueue pqCopy(PriorityQueue queue)
     {
         return NULL;
     }
-    PriorityQueue new_pq = pqCreate(queue->copy_element, queue->free_element,
-                                    queue->equal_elements, queue->copy_priority, queue->free_priority, queue->compare_priority);
+    PriorityQueue new_pq = pqCreate(queue->copy_element, queue->free_element, queue->equal_elements,
+                                    queue->copy_priority, queue->free_priority, queue->compare_priority);
 
     queue->iterator = -1;
     if (new_pq == NULL)
@@ -206,7 +206,7 @@ PriorityQueueResult pqInsert(PriorityQueue queue, PQElement element,
         return PQ_NULL_ARGUMENT;
     }
     queue->iterator = -1;
-    if (queue->size == queue->maxSize && expand(queue) == PQ_OUT_OF_MEMORY)
+    if (queue->size == queue->max_size && expand(queue) == PQ_OUT_OF_MEMORY)
     {
         return PQ_OUT_OF_MEMORY;
     }
@@ -239,21 +239,21 @@ PriorityQueueResult pqInsert(PriorityQueue queue, PQElement element,
 static PriorityQueueResult expand(PriorityQueue queue)
 {
     assert(queue != NULL);
-    int newSize = EXPAND_FACTOR * queue->maxSize;
-    PQElement *newElements = realloc(queue->elements, newSize * sizeof(PQElement));
-    if (newElements == NULL)
+    int new_size = EXPAND_FACTOR * queue->max_size;
+    PQElement *new_elements = realloc(queue->elements, new_size * sizeof(PQElement));
+    if (new_elements == NULL)
     {
         return PQ_OUT_OF_MEMORY;
     }
-    PQElementPriority *newPriorities = realloc(queue->priorities, newSize * sizeof(PQElementPriority));
-    if (newPriorities == NULL)
+    PQElementPriority *new_priorities = realloc(queue->priorities, new_size * sizeof(PQElementPriority));
+    if (new_priorities == NULL)
     {
         return PQ_OUT_OF_MEMORY;
         // in this case the user should destroy the queue so we don't free elements.
     }
-    queue->priorities = newPriorities;
-    queue->elements = newElements;
-    queue->maxSize = newSize;
+    queue->priorities = new_priorities;
+    queue->elements = new_elements;
+    queue->max_size = new_size;
     return PQ_SUCCESS;
 }
 
@@ -263,7 +263,7 @@ static PriorityQueueResult insertToQueueByIndex(PriorityQueue queue,
 
     assert(queue != NULL && index >= 0);
     queue->size++;
-    if (queue->size == queue->maxSize && expand(queue) == PQ_OUT_OF_MEMORY)
+    if (queue->size == queue->max_size && expand(queue) == PQ_OUT_OF_MEMORY)
     {
         return PQ_OUT_OF_MEMORY;
     }
@@ -324,7 +324,8 @@ PriorityQueueResult pqRemoveElement(PriorityQueue queue, PQElement element)
     {
         return PQ_ELEMENT_DOES_NOT_EXISTS;
     }
-    int index = find(queue, element); // because they are sorted - the biggest priority element exists in the first element
+    int index = find(queue, element); // because they are sorted
+                                      // - the biggest priority element exists in the first element
     return pqRemoveElementByIndex(queue, index);
 }
 
@@ -363,20 +364,6 @@ PriorityQueueResult pqClear(PriorityQueue queue)
         pqRemoveElementByIndex(queue, 0);
         queue->size++;
     }
-
-   /* int newSize = INITIAL_SIZE;
-
-    PQElement *newElements = realloc(queue->elements, newSize * sizeof(PQElement));
-    if (newElements == NULL)
-    {
-        return PQ_OUT_OF_MEMORY;
-    }
-    PQElementPriority *newPriorities = realloc(queue->priorities, newSize * sizeof(PQElementPriority));
-    if (newPriorities == NULL)
-    {
-        return PQ_OUT_OF_MEMORY;
-        // in this case the user should destroy the queue so we don't free elements.
-    }*/
 
     queue->size = 0;
     return PQ_SUCCESS;

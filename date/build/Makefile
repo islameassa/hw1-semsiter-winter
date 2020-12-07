@@ -168,33 +168,6 @@ date.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_executable.dir\build.make CMakeFiles/my_executable.dir/date.c.s
 .PHONY : date.c.s
 
-dateTest.obj: dateTest.c.obj
-
-.PHONY : dateTest.obj
-
-# target to build an object file
-dateTest.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_executable.dir\build.make CMakeFiles/my_executable.dir/dateTest.c.obj
-.PHONY : dateTest.c.obj
-
-dateTest.i: dateTest.c.i
-
-.PHONY : dateTest.i
-
-# target to preprocess a source file
-dateTest.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_executable.dir\build.make CMakeFiles/my_executable.dir/dateTest.c.i
-.PHONY : dateTest.c.i
-
-dateTest.s: dateTest.c.s
-
-.PHONY : dateTest.s
-
-# target to generate assembly for a file
-dateTest.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_executable.dir\build.make CMakeFiles/my_executable.dir/dateTest.c.s
-.PHONY : dateTest.c.s
-
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -207,9 +180,6 @@ help:
 	@echo ... date.obj
 	@echo ... date.i
 	@echo ... date.s
-	@echo ... dateTest.obj
-	@echo ... dateTest.i
-	@echo ... dateTest.s
 .PHONY : help
 
 

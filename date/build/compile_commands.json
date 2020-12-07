@@ -1,11 +1,6 @@
 [
 {
   "directory": "C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/date/build",
-  "command": "C:\\GCC\\bin\\x86_64-w64-mingw32-gcc.exe   -std=c99 --pedantic-errors -Wall -Werror -g -o CMakeFiles\\my_executable.dir\\dateTest.c.obj -c C:\\Users\\thoma\\OneDrive\\Documents\\GitHub\\hw1-semsiter-winter\\date\\dateTest.c",
-  "file": "C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/date/dateTest.c"
-},
-{
-  "directory": "C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/date/build",
   "command": "C:\\GCC\\bin\\x86_64-w64-mingw32-gcc.exe   -std=c99 --pedantic-errors -Wall -Werror -g -o CMakeFiles\\my_executable.dir\\date.c.obj -c C:\\Users\\thoma\\OneDrive\\Documents\\GitHub\\hw1-semsiter-winter\\date\\date.c",
   "file": "C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/date/date.c"
 }

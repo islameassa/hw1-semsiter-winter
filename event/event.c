@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <assert.h>
 
 #define INITIAL_SIZE 10
 #define EXPAND_FACTOR 2
@@ -17,7 +18,7 @@ struct Event_t
     int iterator;
 };
 
-static char *copyString(char *string);
+static char *copyString(char *string)
 {
     char *new_string = malloc(strlen(string) + 1);
     if (new_string == NULL)
@@ -39,8 +40,8 @@ static EventResult eventRemoveMemberByIndex(Event event, int index)
         event->members[i] = event->members[i + 1];
     }
 
-    queue->size--;
-    queue->iterator = -1;
+    event->members_size --;
+    event->iterator = -1;
 
     return EVENT_SUCCESS;
 }
@@ -77,7 +78,7 @@ static EventResult expand(Event event)
         return EVENT_OUT_OF_MEMORY;
     }
     event->members = new_members;
-    queue->max_size = new_size;
+    event->members_max_size = new_size;
     return EVENT_SUCCESS;
 }
 
@@ -140,7 +141,7 @@ void eventDestroy(Event event)
     for (int i = 0; i < event->members_size; i++)
     {
         eventRemoveMemberByIndex(event, 0);
-        queue->size++;
+        event->members_size++;
     }
 
     free(event->members);
