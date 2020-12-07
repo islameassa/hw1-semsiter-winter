@@ -3,6 +3,7 @@
 
 #include <stdbool.h>
 #include "../member/member.h"
+#include "../date/date.h"
 
 /**
 * Event
@@ -48,12 +49,13 @@ typedef enum EventResult_t
 *
 * @param id - The ID number of the event
 * @param name - The name of the event
+* @param date - The date of the event
 *
 * @return
 * 	NULL - if one of the parameters is NULL or allocations failed.
 * 	A new event in case of success.
 */
-Event eventCreate(int id, char *name);
+Event eventCreate(int id, char *name, Date date);
 
 /**
 * eventDestroy: Deallocates an existing event.
@@ -93,6 +95,15 @@ char *eventGetName(Event event);
 int eventGetId(Event event);
 
 /**
+* eventGetDate: Returns the date of the event
+* @param event - The event which date is requested
+* @return
+* 	NULL if a NULL pointer was sent.
+* 	Otherwise the date of the event.
+*/
+Date eventGetDate(Event event);
+
+/**
 *   eventEquals: Checks if two events are equals.
 *
 * @param event1 - The first event to compare
@@ -130,6 +141,19 @@ EventResult eventAddMember(Event event, Member member);
 * 	event_SUCCESS if the member had been removed successfully.
 */
 EventResult eventRemoveMember(Event event, Member member);
+
+/**
+*   eventChangeDate: Changes the event's date
+*
+* @param event - The event which date should be changed.
+* @param date - The new date for the event
+*
+* @return
+* 	EVENT_NULL_ARGUMENT if a NULL was sent to the function.
+* 	EVENT_OUT_OF_MEMORY if an allocation failed.
+* 	event_SUCCESS if the date has been changed successfully.
+*/
+EventResult eventChangeDate(Event event, Date date);
 
 /**
 *	eventGetFirst: Sets the internal iterator (also called current member) to

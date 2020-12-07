@@ -39,13 +39,16 @@ static int compareIntsGeneric(PQElementPriority n1, PQElementPriority n2)
     return (*(int *)n1 - *(int *)n2);
 }
 
-static Event getEventByName(PriorityQueue pq, char *event_name)
+static Event getEventByNameAndDate(PriorityQueue pq, char *event_name, Date date)
 {
     PQ_FOREACH(Event, iterator, pq)
     {
         if (strcmp(eventGetName(iterator), event_name) == 0)
         {
-            return iterator;
+            if (dateCompare(date, eventGetDate(iterator)) == 0)
+            {
+                return iterator;
+            }
         }
     }
     return NULL;
@@ -146,15 +149,19 @@ EventManagerResult emAddEventByDate(EventManager em, char *event_name, Date date
         return EM_INVALID_EVENT_ID;
     }
 
-    // EM_EVENT_ALREADY_EXISTS?????
-
-    Event tmp = getEventByName(em->events, event_name);
+    Event tmp = getEventByNameAndDate(em->events, event_name, date);
     if (tmp != NULL)
     {
         return EM_EVENT_ALREADY_EXISTS;
     }
 
-    Event new_event = eventCreate(event_id, event_name);
+    tmp = getEventById(em->events, event_id);
+    if (tmp != NULL)
+    {
+        return EM_EVENT_ID_ALREADY_EXISTS;
+    }
+
+    Event new_event = eventCreate(event_id, event_name, date);
     if (new_event == NULL)
     {
         return EM_OUT_OF_MEMORY;
@@ -187,7 +194,9 @@ EventManagerResult emAddEventByDiff(EventManager em, char *event_name, int days,
     {
         dateTick(new_date);
     }
-    return emAddEventByDate(em, event_name, new_date, event_id);
+    EventManagerResult result = emAddEventByDate(em, event_name, new_date, event_id);
+    dateDestroy(new_date);
+    return result;
 }
 
 EventManagerResult emRemoveEvent(EventManager em, int event_id)
@@ -205,6 +214,21 @@ EventManagerResult emRemoveEvent(EventManager em, int event_id)
     Event tmp = getEventById(em->events, event_id);
     if (tmp != NULL)
     {
+        EVENT_FOREACH(iterator, tmp)
+        {
+            PQ_FOREACH(Member, iterator2, em->members)
+            {
+                if (memberCompare(iterator, iterator2) == 0)
+                {
+                    memberChangeEventNumber(iterator2, memberGetEventNumber(iterator2) - 1);
+                    int tmp1 = memberGetEventNumber(iterator2) + 1;
+                    int *tmp_pointer = &tmp1;
+                    int tmp2 = memberGetEventNumber(iterator2);
+                    int *tmp2_pointer = &tmp2;
+                    pqChangePriority(em->members, iterator2, tmp_pointer, tmp2_pointer);
+                }
+            }
+        }
         pqRemoveElement(em->events, tmp);
         return EM_SUCCESS;
     }
@@ -230,14 +254,19 @@ EventManagerResult emChangeEventDate(EventManager em, int event_id, Date new_dat
     }
 
     Event tmp = getEventById(em->events, event_id);
-    if(tmp == NULL)
+    if (tmp == NULL)
     {
         return EM_EVENT_ID_NOT_EXISTS;
     }
 
-    // EM_EVENT_ALREADY_EXISTS?????
+    Event tmp2 = getEventByNameAndDate(em->events, eventGetName(tmp), new_date);
+    if (tmp2 != NULL)
+    {
+        return EM_EVENT_ALREADY_EXISTS;
+    }
 
-    if(pqChangePriority(em->events, tmp, , new_date) == PQ_OUT_OF_MEMORY)
+    if (pqChangePriority(em->events, tmp, eventGetDate(tmp), new_date) == PQ_OUT_OF_MEMORY ||
+        eventChangeDate(tmp, new_date) == EVENT_OUT_OF_MEMORY)
     {
         return EM_OUT_OF_MEMORY;
     }
@@ -245,33 +274,33 @@ EventManagerResult emChangeEventDate(EventManager em, int event_id, Date new_dat
     return EM_SUCCESS;
 }
 
-EventManagerResult emAddMember(EventManager em, char* member_name, int member_id)
+EventManagerResult emAddMember(EventManager em, char *member_name, int member_id)
 {
-    if(em == NULL || member_name == NULL)
+    if (em == NULL || member_name == NULL)
     {
         return EM_NULL_ARGUMENT;
     }
 
-    if(member_id < 0)
+    if (member_id < 0)
     {
         return EM_INVALID_MEMBER_ID;
     }
 
     Member tmp = getMemberById(em->members, member_id);
-    if(tmp != NULL)
+    if (tmp != NULL)
     {
         return EM_MEMBER_ID_ALREADY_EXISTS;
     }
 
     Member new_member = memberCreate(member_id, member_name);
-    if(new_member == NULL)
+    if (new_member == NULL)
     {
         return EM_OUT_OF_MEMORY;
     }
-    
+
     int events = 0;
     int *events_pointer = events;
-    if(pqInsert(em->members, new_member, events) == PQ_OUT_OF_MEMORY)
+    if (pqInsert(em->members, new_member, events_pointer) == PQ_OUT_OF_MEMORY)
     {
         return EM_OUT_OF_MEMORY;
     }

@@ -13,6 +13,12 @@ Member memberCopy(Member member);
 
 char *memberGetName(Member member);
 
+int memberGetId(Member member);
+
+int memberGetEventNumber(Member member);
+
+void memberChangeEventNumber(Member member, int new_event_number);
+
 int memberCompare(Member member1, Member member2);
 
 #endif /* MEMBER_H_ */

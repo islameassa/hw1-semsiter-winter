@@ -13,8 +13,6 @@ Member memberCopy(Member member);
 
 char *memberGetName(Member member);
 
-int memberGetId(Member member);
-
 int memberCompare(Member member1, Member member2);
 
 #endif /* MEMBER_H_ */

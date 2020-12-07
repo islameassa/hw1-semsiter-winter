@@ -12,6 +12,7 @@ struct Event_t
 {
     int id;
     char *name;
+    Date date;
     Member *members;
     int members_size;
     int members_max_size;
@@ -95,9 +96,9 @@ static int find(Event event, Member member)
     return MEMBER_NOT_FOUND;
 }
 
-Event eventCreate(int id, char *name)
+Event eventCreate(int id, char *name, Date date)
 {
-    if(name == NULL)
+    if(name == NULL || date == NULL)
     {
         return NULL;
     }
@@ -123,8 +124,18 @@ Event eventCreate(int id, char *name)
         return NULL;
     }
 
+    Date new_date = dateCopy(date);
+    if(new_date == NULL)
+    {
+        free(event->members);
+        free(new_name);
+        free(event);
+        return NULL;
+    }
+
     event->id = id;
     event->name = new_name;
+    event->date = new_date;
     event->members_size = 0;
     event->members_max_size = INITIAL_SIZE;
     event->iterator = -1;
@@ -144,6 +155,7 @@ void eventDestroy(Event event)
         event->members_size++;
     }
 
+    dateDestroy(event->date);
     free(event->members);
     free(event->name);
     free(event);
@@ -156,13 +168,14 @@ Event eventCopy(Event event)
         return NULL;
     }
 
-    Event new_event = eventCreate(event->id, event->name);
+    Event new_event = eventCreate(event->id, event->name, event->date);
 
     event->iterator = -1;
     if (new_event == NULL)
     {
         return NULL;
     }
+
     if (addAllOrDestroy(new_event, event) == EVENT_OUT_OF_MEMORY)
     {
         return NULL;
@@ -189,10 +202,20 @@ int eventGetId(Event event)
     return event->id;
 }
 
+Date eventGetDate(Event event)
+{
+    if (event == NULL)
+    {
+        return NULL;
+    }
+    return event->date;
+}
+
 bool eventEquals(Event event1, Event event2)
 {
     if (event1 == NULL || event2 == NULL || event1->id != event2->id ||
-        strcmp(event1->name, event2->name) != 0 || event1->members_size != event2->members_size)
+        strcmp(event1->name, event2->name) != 0 || event1->members_size != event2->members_size
+        || dateCompare(event1->date, event2->date) != 0)
     {
         return false;
     }
@@ -249,6 +272,23 @@ EventResult eventRemoveMember(Event event, Member member)
         return EVENT_MEMBER_DOES_NOT_EXIST;
     }
     return eventRemoveMemberByIndex(event, index);
+}
+
+EventResult eventChangeDate(Event event, Date date)
+{
+    if(event == NULL || date == NULL)
+    {
+        return EVENT_NULL_ARGUMENT;
+    }
+
+    Date new_date = dateCopy(date);
+    if(new_date == NULL)
+    {
+        return EVENT_OUT_OF_MEMORY;
+    }
+
+    event->date = new_date;
+    return EVENT_SUCCESS;
 }
 
 Member eventGetFirst(Event event)

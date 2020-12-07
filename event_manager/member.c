@@ -13,6 +13,7 @@ struct Member_t
 {
     int id;
     char *name;
+    int event_number;
 };
 
 static char *copyString(char *string)
@@ -45,6 +46,7 @@ Member createMember(int id, char *name)
     }
     member->id = id;
     member->name = new_name;
+    member->event_number = 0;
 
     return member;
 }
@@ -71,6 +73,8 @@ Member memberCopy(Member member)
     {
         return NULL;
     }
+    new_member->event_number = member->event_number;
+
     return new_member;
 }
 
@@ -90,6 +94,24 @@ int memberGetId(Member member)
         return NULL;
     }
     return member->id;
+}
+
+int memberGetEventNumber(Member member)
+{
+    if (member == NULL)
+    {
+        return NULL;
+    }
+    return member->event_number;
+}
+
+void memberChangeEventNumber(Member member, int new_event_number)
+{
+    if(member == NULL)
+    {
+        return;
+    }
+    member->event_number = new_event_number;
 }
 
 int memberCompare(Member member1, Member member2)
