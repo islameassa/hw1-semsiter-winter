@@ -90,7 +90,9 @@ EventManager createEventManager(Date date)
     {
         return NULL;
     }
-
+    
+    // preffer to start  with null
+    
     em->events = pqCreate(eventCopy, eventDestroy, eventEquals, dateCopy, dateDestroy, dateCompare);
     if (em->events == NULL)
     {
@@ -104,14 +106,14 @@ EventManager createEventManager(Date date)
         free(em);
         free(em->events);
         return NULL;
-    }
+    } 
 
     Date new_date = dateCopy(date);
     if (new_date == NULL)
     {
         free(em);
-        free(em->events);
-        free(em->members);
+        //free(em->events);
+        //free(em->members);
         return NULL;
     }
 
@@ -160,13 +162,14 @@ EventManagerResult emAddEventByDate(EventManager em, char *event_name, Date date
     {
         return EM_EVENT_ID_ALREADY_EXISTS;
     }
-
+    
     Event new_event = eventCreate(event_id, event_name, date);
     if (new_event == NULL)
     {
         return EM_OUT_OF_MEMORY;
     }
 
+    // if events and members == null create - then do this
     if (pqInsert(em->events, new_event, date) == PQ_OUT_OF_MEMORY)
     {
         eventDestroy(new_event);
@@ -259,6 +262,7 @@ EventManagerResult emChangeEventDate(EventManager em, int event_id, Date new_dat
         return EM_EVENT_ID_NOT_EXISTS;
     }
 
+    // beautiful
     Event tmp2 = getEventByNameAndDate(em->events, eventGetName(tmp), new_date);
     if (tmp2 != NULL)
     {
@@ -289,6 +293,7 @@ EventManagerResult emAddMember(EventManager em, char *member_name, int member_id
     Member tmp = getMemberById(em->members, member_id);
     if (tmp != NULL)
     {
+        // destroy temp? no need
         return EM_MEMBER_ID_ALREADY_EXISTS;
     }
 
@@ -299,7 +304,7 @@ EventManagerResult emAddMember(EventManager em, char *member_name, int member_id
     }
 
     int events = 0;
-    int *events_pointer = events;
+    int *events_pointer = &events;
     if (pqInsert(em->members, new_member, events_pointer) == PQ_OUT_OF_MEMORY)
     {
         return EM_OUT_OF_MEMORY;

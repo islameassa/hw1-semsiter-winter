@@ -91,7 +91,7 @@ int memberGetId(Member member)
 {
     if (member == NULL)
     {
-        return NULL;
+        return -1;
     }
     return member->id;
 }
@@ -100,7 +100,7 @@ int memberGetEventNumber(Member member)
 {
     if (member == NULL)
     {
-        return NULL;
+        return -1;
     }
     return member->event_number;
 }
