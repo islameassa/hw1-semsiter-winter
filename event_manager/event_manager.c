@@ -90,30 +90,27 @@ EventManager createEventManager(Date date)
     {
         return NULL;
     }
-    
-    // preffer to start  with null
-    
+
     em->events = pqCreate(eventCopy, eventDestroy, eventEquals, dateCopy, dateDestroy, dateCompare);
     if (em->events == NULL)
     {
         free(em);
         return NULL;
     }
-
     em->members = pqCreate(memberCopy, memberDestroy, memberCompare, copyIntGeneric, freeIntGeneric, compareIntsGeneric);
     if (em->members == NULL)
     {
         free(em);
         free(em->events);
         return NULL;
-    } 
+    }
 
     Date new_date = dateCopy(date);
     if (new_date == NULL)
     {
         free(em);
-        //free(em->events);
-        //free(em->members);
+        free(em->events);
+        free(em->members);
         return NULL;
     }
 
@@ -162,14 +159,13 @@ EventManagerResult emAddEventByDate(EventManager em, char *event_name, Date date
     {
         return EM_EVENT_ID_ALREADY_EXISTS;
     }
-    
+
     Event new_event = eventCreate(event_id, event_name, date);
     if (new_event == NULL)
     {
         return EM_OUT_OF_MEMORY;
     }
 
-    // if events and members == null create - then do this
     if (pqInsert(em->events, new_event, date) == PQ_OUT_OF_MEMORY)
     {
         eventDestroy(new_event);
@@ -202,6 +198,8 @@ EventManagerResult emAddEventByDiff(EventManager em, char *event_name, int days,
     return result;
 }
 
+
+// we didnt use EM_OUT_OF_MEMORY
 EventManagerResult emRemoveEvent(EventManager em, int event_id)
 {
     if (em == NULL)
@@ -262,7 +260,6 @@ EventManagerResult emChangeEventDate(EventManager em, int event_id, Date new_dat
         return EM_EVENT_ID_NOT_EXISTS;
     }
 
-    // beautiful
     Event tmp2 = getEventByNameAndDate(em->events, eventGetName(tmp), new_date);
     if (tmp2 != NULL)
     {
@@ -293,7 +290,6 @@ EventManagerResult emAddMember(EventManager em, char *member_name, int member_id
     Member tmp = getMemberById(em->members, member_id);
     if (tmp != NULL)
     {
-        // destroy temp? no need
         return EM_MEMBER_ID_ALREADY_EXISTS;
     }
 
@@ -304,11 +300,134 @@ EventManagerResult emAddMember(EventManager em, char *member_name, int member_id
     }
 
     int events = 0;
-    int *events_pointer = &events;
+    int *events_pointer = events;
     if (pqInsert(em->members, new_member, events_pointer) == PQ_OUT_OF_MEMORY)
     {
         return EM_OUT_OF_MEMORY;
     }
 
     return EM_SUCCESS;
+}
+
+EventManagerResult emAddMemberToEvent(EventManager em, int member_id, int event_id)
+{
+    if(em == NULL)
+    {
+        return EM_NULL_ARGUMENT;
+    }
+
+    if(event_id < 0)
+    {
+        return EM_INVALID_EVENT_ID;
+    }
+
+    if(member_id < 0)
+    {
+        return EM_INVALID_MEMBER_ID;
+    }
+
+    Event ev_tmp = getEventById(em->events,event_id);
+    if(ev_tmp == NULL){
+        return EM_EVENT_ID_NOT_EXISTS;        
+    }
+    Member member_tmp = getMemberById(em->members,member_id);
+    if(member_tmp == NULL){
+        return EM_MEMBER_ID_NOT_EXISTS;
+    }
+    EVENT_FOREACH(iterator, ev_tmp){
+        if(memberGetId(iterator) == member_id){
+            return EM_EVENT_AND_MEMBER_ALREADY_LINKED;
+        }
+    }
+    // they order to destroy everything and to finish program
+    if(eventAddMember(ev_tmp,member_tmp) == EVENT_OUT_OF_MEMORY){
+        return EM_OUT_OF_MEMORY;
+    }
+    return EM_SUCCESS;
+}
+
+EventManagerResult emRemoveMemberFromEvent (EventManager em, int member_id, int event_id){
+    if(em == NULL)
+    {
+        return EM_NULL_ARGUMENT;
+    }
+
+    if(event_id < 0)
+    {
+        return EM_INVALID_EVENT_ID;
+    }
+
+    if(member_id < 0)
+    {
+        return EM_INVALID_MEMBER_ID;
+    }
+
+    Event ev_tmp = getEventById(em->events,event_id);
+    if(ev_tmp == NULL){
+        return EM_EVENT_ID_NOT_EXISTS;        
+    }
+    Member member_tmp = getMemberById(em->members,member_id);
+    if(member_tmp == NULL){
+        return EM_MEMBER_ID_NOT_EXISTS;
+    }
+    if(eventRemoveMember(ev_tmp,member_tmp) == EVENT_MEMBER_DOES_NOT_EXIST){
+        return EM_EVENT_AND_MEMBER_NOT_LINKED;
+    }
+
+            PQ_FOREACH(Member, iterator2, em->members)
+            {
+                if (memberCompare(member_tmp, iterator2) == 0)
+                {
+                    memberChangeEventNumber(iterator2, memberGetEventNumber(iterator2) - 1);
+                    int tmp1 = memberGetEventNumber(iterator2) + 1;
+                    int *tmp_pointer = &tmp1;
+                    int tmp2 = memberGetEventNumber(iterator2);
+                    int *tmp2_pointer = &tmp2;     
+                    if(pqChangePriority(em->members, iterator2, tmp_pointer, tmp2_pointer) == PQ_OUT_OF_MEMORY){
+                        return EM_OUT_OF_MEMORY;
+                    }
+                    break;
+                }
+            }
+
+    return EM_SUCCESS;
+}
+
+// we didnt use EM_OUT_OF_MEMORY
+EventManagerResult emTick(EventManager em, int days){
+    if(em == NULL){
+        return EM_NULL_ARGUMENT;
+    }
+    if(days <= 0){
+        return EM_INVALID_DATE;
+    }
+
+    for(int i = 0; i < days ; i++){
+        Event ev_tmp  = (Event)pqGetFirst(em->events);
+        
+        while(dateCompare(eventGetDate(ev_tmp) , em->date) == 0){
+            emRemoveEvent(em,eventGetId(ev_tmp));
+            ev_tmp = (Event)pqGetNext(em->events);
+            if(ev_tmp == NULL){
+                break;
+            }
+        }
+        dateTick(em->date);
+    }
+    return EM_SUCCESS;
+}
+
+int emGetEventsAmount(EventManager em){
+    if(em == NULL){
+        return -1;
+    }    
+    return pqGetSize(em->events);
+}
+
+char* emGetNextEvent(EventManager em){
+    if(em == NULL){
+        return NULL;
+    }
+    Event tmp = (Event)pqGetFirst(em->events);
+    return eventGetName(tmp);
 }
