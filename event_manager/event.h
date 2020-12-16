@@ -2,8 +2,8 @@
 #define EVENT_H_
 
 #include <stdbool.h>
-#include "../member/member.h"
-#include "../date/date.h"
+#include "member.h"
+#include "date.h"
 
 /**
 * Event
@@ -154,6 +154,14 @@ EventResult eventRemoveMember(Event event, Member member);
 * 	event_SUCCESS if the date has been changed successfully.
 */
 EventResult eventChangeDate(Event event, Date date);
+
+/**
+*   eventPrint: Prints the details of the event.
+*
+* @param event - The event which details should be printed.
+* @param file - pointer to the output file.
+*/
+void eventPrint(Event event, FILE *file);
 
 /**
 *	eventGetFirst: Sets the internal iterator (also called current member) to

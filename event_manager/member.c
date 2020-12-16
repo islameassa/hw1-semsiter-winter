@@ -39,7 +39,7 @@ Member createMember(int id, char *name)
         return NULL;
     }
     char *new_name = copyString(name);
-    if(new_name == NULL)
+    if (new_name == NULL)
     {
         free(member);
         return NULL;
@@ -53,7 +53,7 @@ Member createMember(int id, char *name)
 
 void memberDestroy(Member member)
 {
-    if(member == NULL)
+    if (member == NULL)
     {
         return;
     }
@@ -91,7 +91,7 @@ int memberGetId(Member member)
 {
     if (member == NULL)
     {
-        return NULL;
+        return -1;
     }
     return member->id;
 }
@@ -100,14 +100,14 @@ int memberGetEventNumber(Member member)
 {
     if (member == NULL)
     {
-        return NULL;
+        return -1;
     }
     return member->event_number;
 }
 
 void memberChangeEventNumber(Member member, int new_event_number)
 {
-    if(member == NULL)
+    if (member == NULL)
     {
         return;
     }
@@ -118,4 +118,9 @@ int memberCompare(Member member1, Member member2)
 {
     assert(member1 != NULL && member2 != NULL);
     return member1->id - member2->id;
+}
+
+void memberPrint(Member member, FILE *file)
+{
+    fprintf(file, "%s,%d", member->name, member->event_number);
 }

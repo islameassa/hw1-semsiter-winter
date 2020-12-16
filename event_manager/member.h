@@ -2,6 +2,7 @@
 #define MEMBER_H_
 
 #include <stdbool.h>
+#include <stdio.h>
 
 typedef struct Member_t *Member;
 
@@ -20,5 +21,7 @@ int memberGetEventNumber(Member member);
 void memberChangeEventNumber(Member member, int new_event_number);
 
 int memberCompare(Member member1, Member member2);
+
+void memberPrint(Member member, FILE *file);
 
 #endif /* MEMBER_H_ */

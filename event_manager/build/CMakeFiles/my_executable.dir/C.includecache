@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/event_manager/date.h
+stdbool.h
+-
+
+C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/event_manager/event.c
+event.h
+C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/event_manager/event.h
+priority_queue.h
+C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/event_manager/priority_queue.h
+stdlib.h
+-
+stdio.h
+-
+string.h
+-
+assert.h
+-
+
+C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/event_manager/event.h
+stdbool.h
+-
+member.h
+C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/event_manager/member.h
+date.h
+C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/event_manager/date.h
+
+C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/event_manager/member.h
+stdbool.h
+-
+stdio.h
+-
+
+C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/event_manager/priority_queue.h
+stdbool.h
+-
+
