@@ -271,13 +271,12 @@ EventManagerResult emRemoveEvent(EventManager em, int event_id)
         pqRemoveElement(em->members, tmp_member);
         if (pqInsert(em->members, tmp_member2, tmp_member2) == PQ_OUT_OF_MEMORY)
         {
-            memberDestroy(tmp_member2);
             return EM_OUT_OF_MEMORY;
         }
+        memberDestroy(tmp_member2);
     }
     pqRemoveElement(em->events, tmp);
 
-    memberDestroy(tmp_member2);
     return EM_SUCCESS;
 }
 
@@ -466,13 +465,13 @@ EventManagerResult emTick(EventManager em, int days)
         dateTick(em->date);
     }
 
-    PQ_FOREACH(Event, iterator, em->events)
+    while (1)
     {
-        if (dateCompare(eventGetDate(iterator), em->date) >= 0)
+        if (dateCompare(eventGetDate(pqGetFirst(em->events)), em->date) >= 0)
         {
             break;
         }
-        emRemoveEvent(em, eventGetId(iterator));
+        emRemoveEvent(em, eventGetId(pqGetFirst(em->events)));
     }
 
     return EM_SUCCESS;
@@ -523,8 +522,11 @@ void emPrintAllResponsibleMembers(EventManager em, const char *file_name)
 
     PQ_FOREACH(Member, iterator, em->members)
     {
-        memberPrint(iterator, file);
-        fprintf(file, "\n");
+        if (memberGetEventNumber(iterator) > 0)
+        {
+            memberPrint(iterator, file);
+            fprintf(file, "\n");
+        }
     }
     fclose(file);
 }

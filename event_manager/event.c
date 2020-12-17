@@ -240,7 +240,7 @@ void eventPrint(Event event, FILE *file)
     fprintf(file, "%s,%d.%d.%d", event->name, day, month, year);
     PQ_FOREACH(Member, iterator, event->members)
     {
-        fprintf(file, "%s", memberGetName(iterator));
+        fprintf(file, ",%s", memberGetName(iterator));
     }
 }
 

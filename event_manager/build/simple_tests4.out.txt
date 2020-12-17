@@ -1,2 +1,2 @@
-member1,1
-member2,1
+member1,0
+member2,0
