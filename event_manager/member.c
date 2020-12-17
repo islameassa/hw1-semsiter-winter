@@ -27,7 +27,7 @@ static char *copyString(char *string)
     return new_string;
 }
 
-Member createMember(int id, char *name)
+Member memberCreate(int id, char *name)
 {
     if (name == NULL)
     {
@@ -114,10 +114,13 @@ void memberChangeEventNumber(Member member, int new_event_number)
     member->event_number = new_event_number;
 }
 
-int memberCompare(Member member1, Member member2)
+bool memberCompare(Member member1, Member member2)
 {
-    assert(member1 != NULL && member2 != NULL);
-    return member1->id - member2->id;
+    if(member1 == NULL || member2 == NULL)
+    {
+        return NULL;
+    }
+    return (member1->id - member2->id == 0) ? true : false;
 }
 
 void memberPrint(Member member, FILE *file)

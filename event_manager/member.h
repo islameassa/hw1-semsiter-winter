@@ -20,7 +20,7 @@ int memberGetEventNumber(Member member);
 
 void memberChangeEventNumber(Member member, int new_event_number);
 
-int memberCompare(Member member1, Member member2);
+bool memberCompare(Member member1, Member member2);
 
 void memberPrint(Member member, FILE *file);
 

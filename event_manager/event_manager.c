@@ -53,11 +53,59 @@ static Member getMemberById(PriorityQueue pq, int member_id)
     return NULL;
 }
 
-static int compareMemberPriorities(Member member1, Member member2)
+static int compareMemberPriorities(PQElementPriority member1, PQElementPriority member2)
 {
-    return ((memberGetEventNumber(member1) - memberGetEventNumber(member2)) != 0)
-               ? (memberGetEventNumber(member1) - memberGetEventNumber(member2))
-               : (memberGetId(member2) - memberGetId(member2));
+    return ((memberGetEventNumber((Member)member1) - memberGetEventNumber((Member)member2)) != 0)
+               ? (memberGetEventNumber((Member)member1) - memberGetEventNumber((Member)member2))
+               : (memberGetId((Member)member2) - memberGetId((Member)member2));
+}
+
+static PQElement copyMemberGeneric(PQElement member)
+{
+    Member member_copy = memberCopy((Member)member);
+    return member_copy;
+}
+
+static void freeMemberGeneric(PQElement member)
+{
+    memberDestroy((Member)member);
+}
+
+static bool compareMembersGeneric(PQElement member1, PQElement member2)
+{
+    return memberCompare((Member)member1, (Member)member2);
+}
+
+static PQElement copyEventGeneric(PQElement event)
+{
+    Event event_copy = eventCopy((Event)event);
+    return event_copy;
+}
+
+static void freeEventGeneric(PQElement event)
+{
+    eventDestroy((Event)event);
+}
+
+static bool compareEventsGeneric(PQElement event1, PQElement event2)
+{
+    return eventEquals((Event)event1, (Event)event2);
+}
+
+static PQElementPriority copyDateGeneric(PQElementPriority date)
+{
+    Date date_copy = dateCopy((Date)date);
+    return date_copy;
+}
+
+static void freeDateGeneric(PQElementPriority date)
+{
+    dateDestroy((Date)date);
+}
+
+static int compareDatesGeneric(PQElementPriority date1, PQElementPriority date2)
+{
+    return dateCompare((Date)date1, (Date)date2);
 }
 
 EventManager createEventManager(Date date)
@@ -73,14 +121,14 @@ EventManager createEventManager(Date date)
         return NULL;
     }
 
-    em->events = pqCreate(eventCopy, eventDestroy, eventEquals, dateCopy, dateDestroy, dateCompare);
+    em->events = pqCreate(copyEventGeneric, freeEventGeneric, compareEventsGeneric, copyDateGeneric, freeDateGeneric, compareDatesGeneric);
     if (em->events == NULL)
     {
         free(em);
         return NULL;
     }
 
-    em->members = pqCreate(memberCopy, memberDestroy, memberCompare, memberCopy, memberDestroy, compareMemberPriorities);
+    em->members = pqCreate(copyMemberGeneric, freeMemberGeneric, compareMembersGeneric, copyMemberGeneric, freeMemberGeneric, compareMemberPriorities);
     if (em->members == NULL)
     {
         pqDestroy(em->events);
@@ -292,6 +340,7 @@ EventManagerResult emAddMember(EventManager em, char *member_name, int member_id
 
     if (pqInsert(em->members, new_member, new_member) == PQ_OUT_OF_MEMORY)
     {
+        memberDestroy(new_member);
         return EM_OUT_OF_MEMORY;
     }
 

@@ -13,9 +13,7 @@
 	{
 		"commands" : 
 		[
-			"add_executable",
-			"link_directories",
-			"target_link_libraries"
+			"add_executable"
 		],
 		"files" : 
 		[
@@ -29,19 +27,7 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 7,
-				"parent" : 0
-			},
-			{
-				"command" : 1,
-				"file" : 0,
 				"line" : 6,
-				"parent" : 0
-			},
-			{
-				"command" : 2,
-				"file" : 0,
-				"line" : 8,
 				"parent" : 0
 			}
 		]
@@ -78,24 +64,6 @@
 			{
 				"fragment" : "",
 				"role" : "flags"
-			},
-			{
-				"backtrace" : 2,
-				"fragment" : "-LC:\\Users\\thoma\\OneDrive\\Documents\\GitHub\\hw1-semsiter-winter\\event_manager\\.",
-				"role" : "libraryPath"
-			},
-			{
-				"fragment" : "-Wl,-Bstatic",
-				"role" : "libraries"
-			},
-			{
-				"backtrace" : 3,
-				"fragment" : "-lpriority_queue",
-				"role" : "libraries"
-			},
-			{
-				"fragment" : "-Wl,-Bdynamic",
-				"role" : "libraries"
 			},
 			{
 				"fragment" : "-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32",

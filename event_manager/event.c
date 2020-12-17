@@ -13,6 +13,22 @@ struct Event_t
     PriorityQueue members;
 };
 
+static PQElement copyMemberGeneric(PQElement member)
+{
+    Member member_copy = memberCopy((Member)member);
+    return member_copy;
+}
+
+static void freeMemberGeneric(PQElement member)
+{
+    memberDestroy((Member)member);
+}
+
+static bool compareMembersGeneric(PQElement member1, PQElement member2)
+{
+    return memberCompare((Member)member1, (Member)member2);
+}
+
 static PQElementPriority copyIntGeneric(PQElementPriority n)
 {
     if (!n)
@@ -62,7 +78,7 @@ Event eventCreate(int id, char *name, Date date)
         return NULL;
     }
 
-    event->members = pqCreate(memberCopy, memberDestroy, memberCompare,
+    event->members = pqCreate(copyMemberGeneric, freeMemberGeneric, compareMembersGeneric,
                               copyIntGeneric, freeIntGeneric, compareIntsGeneric);
     if (event->members == NULL)
     {
