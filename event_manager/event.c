@@ -141,6 +141,8 @@ Event eventCopy(Event event)
     {
         return NULL;
     }
+
+    pqDestroy(new_event->members);
     new_event->members = new_pq;
 
     return new_event;

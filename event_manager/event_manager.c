@@ -57,7 +57,7 @@ static int compareMemberPriorities(PQElementPriority member1, PQElementPriority 
 {
     return ((memberGetEventNumber((Member)member1) - memberGetEventNumber((Member)member2)) != 0)
                ? (memberGetEventNumber((Member)member1) - memberGetEventNumber((Member)member2))
-               : (memberGetId((Member)member2) - memberGetId((Member)member2));
+               : (memberGetId((Member)member2) - memberGetId((Member)member1));
 }
 
 static PQElement copyMemberGeneric(PQElement member)
