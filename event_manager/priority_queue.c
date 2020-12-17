@@ -347,8 +347,10 @@ PriorityQueueResult pqChangePriority(PriorityQueue queue, PQElement element,
         return PQ_ELEMENT_DOES_NOT_EXISTS;
     }
 
+    PQElement element_tmp = queue->copy_element(element);
     pqRemoveElementByIndex(queue, index);
-    pqInsert(queue, element, new_priority);
+    pqInsert(queue, element_tmp, new_priority);
+    queue->free_element(element_tmp);
     return PQ_SUCCESS;
 }
 

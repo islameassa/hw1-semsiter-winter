@@ -4,6 +4,10 @@
 CMakeFiles/my_executable.dir/date.c.obj: ../date.c
 CMakeFiles/my_executable.dir/date.c.obj: ../date.h
 
+CMakeFiles/my_executable.dir/em_test.c.obj: ../date.h
+CMakeFiles/my_executable.dir/em_test.c.obj: ../em_test.c
+CMakeFiles/my_executable.dir/em_test.c.obj: ../event_manager.h
+
 CMakeFiles/my_executable.dir/event.c.obj: ../date.h
 CMakeFiles/my_executable.dir/event.c.obj: ../event.c
 CMakeFiles/my_executable.dir/event.c.obj: ../event.h
@@ -20,8 +24,6 @@ CMakeFiles/my_executable.dir/event_manager.c.obj: ../priority_queue.h
 CMakeFiles/my_executable.dir/member.c.obj: ../member.c
 CMakeFiles/my_executable.dir/member.c.obj: ../member.h
 
-CMakeFiles/my_executable.dir/tests/event_manager_example_tests.c.obj: ../date.h
-CMakeFiles/my_executable.dir/tests/event_manager_example_tests.c.obj: ../event_manager.h
-CMakeFiles/my_executable.dir/tests/event_manager_example_tests.c.obj: ../tests/event_manager_example_tests.c
-CMakeFiles/my_executable.dir/tests/event_manager_example_tests.c.obj: ../tests/test_utilities.h
+CMakeFiles/my_executable.dir/priority_queue.c.obj: ../priority_queue.c
+CMakeFiles/my_executable.dir/priority_queue.c.obj: ../priority_queue.h
 

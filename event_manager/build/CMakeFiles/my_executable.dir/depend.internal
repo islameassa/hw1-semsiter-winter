@@ -4,6 +4,10 @@
 CMakeFiles/my_executable.dir/date.c.obj
  C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/event_manager/date.c
  C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/event_manager/date.h
+CMakeFiles/my_executable.dir/em_test.c.obj
+ C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/event_manager/date.h
+ C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/event_manager/em_test.c
+ C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/event_manager/event_manager.h
 CMakeFiles/my_executable.dir/event.c.obj
  C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/event_manager/date.h
  C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/event_manager/event.c
@@ -20,8 +24,6 @@ CMakeFiles/my_executable.dir/event_manager.c.obj
 CMakeFiles/my_executable.dir/member.c.obj
  C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/event_manager/member.c
  C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/event_manager/member.h
-CMakeFiles/my_executable.dir/tests/event_manager_example_tests.c.obj
- C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/event_manager/date.h
- C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/event_manager/event_manager.h
- C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/event_manager/tests/event_manager_example_tests.c
- C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/event_manager/tests/test_utilities.h
+CMakeFiles/my_executable.dir/priority_queue.c.obj
+ C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/event_manager/priority_queue.c
+ C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/event_manager/priority_queue.h

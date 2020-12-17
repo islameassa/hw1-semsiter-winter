@@ -168,6 +168,33 @@ date.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_executable.dir\build.make CMakeFiles/my_executable.dir/date.c.s
 .PHONY : date.c.s
 
+em_test.obj: em_test.c.obj
+
+.PHONY : em_test.obj
+
+# target to build an object file
+em_test.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_executable.dir\build.make CMakeFiles/my_executable.dir/em_test.c.obj
+.PHONY : em_test.c.obj
+
+em_test.i: em_test.c.i
+
+.PHONY : em_test.i
+
+# target to preprocess a source file
+em_test.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_executable.dir\build.make CMakeFiles/my_executable.dir/em_test.c.i
+.PHONY : em_test.c.i
+
+em_test.s: em_test.c.s
+
+.PHONY : em_test.s
+
+# target to generate assembly for a file
+em_test.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_executable.dir\build.make CMakeFiles/my_executable.dir/em_test.c.s
+.PHONY : em_test.c.s
+
 event.obj: event.c.obj
 
 .PHONY : event.obj
@@ -249,32 +276,32 @@ member.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_executable.dir\build.make CMakeFiles/my_executable.dir/member.c.s
 .PHONY : member.c.s
 
-tests/event_manager_example_tests.obj: tests/event_manager_example_tests.c.obj
+priority_queue.obj: priority_queue.c.obj
 
-.PHONY : tests/event_manager_example_tests.obj
+.PHONY : priority_queue.obj
 
 # target to build an object file
-tests/event_manager_example_tests.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_executable.dir\build.make CMakeFiles/my_executable.dir/tests/event_manager_example_tests.c.obj
-.PHONY : tests/event_manager_example_tests.c.obj
+priority_queue.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_executable.dir\build.make CMakeFiles/my_executable.dir/priority_queue.c.obj
+.PHONY : priority_queue.c.obj
 
-tests/event_manager_example_tests.i: tests/event_manager_example_tests.c.i
+priority_queue.i: priority_queue.c.i
 
-.PHONY : tests/event_manager_example_tests.i
+.PHONY : priority_queue.i
 
 # target to preprocess a source file
-tests/event_manager_example_tests.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_executable.dir\build.make CMakeFiles/my_executable.dir/tests/event_manager_example_tests.c.i
-.PHONY : tests/event_manager_example_tests.c.i
+priority_queue.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_executable.dir\build.make CMakeFiles/my_executable.dir/priority_queue.c.i
+.PHONY : priority_queue.c.i
 
-tests/event_manager_example_tests.s: tests/event_manager_example_tests.c.s
+priority_queue.s: priority_queue.c.s
 
-.PHONY : tests/event_manager_example_tests.s
+.PHONY : priority_queue.s
 
 # target to generate assembly for a file
-tests/event_manager_example_tests.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_executable.dir\build.make CMakeFiles/my_executable.dir/tests/event_manager_example_tests.c.s
-.PHONY : tests/event_manager_example_tests.c.s
+priority_queue.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\my_executable.dir\build.make CMakeFiles/my_executable.dir/priority_queue.c.s
+.PHONY : priority_queue.c.s
 
 # Help Target
 help:
@@ -288,6 +315,9 @@ help:
 	@echo ... date.obj
 	@echo ... date.i
 	@echo ... date.s
+	@echo ... em_test.obj
+	@echo ... em_test.i
+	@echo ... em_test.s
 	@echo ... event.obj
 	@echo ... event.i
 	@echo ... event.s
@@ -297,9 +327,9 @@ help:
 	@echo ... member.obj
 	@echo ... member.i
 	@echo ... member.s
-	@echo ... tests/event_manager_example_tests.obj
-	@echo ... tests/event_manager_example_tests.i
-	@echo ... tests/event_manager_example_tests.s
+	@echo ... priority_queue.obj
+	@echo ... priority_queue.i
+	@echo ... priority_queue.s
 .PHONY : help
 
 

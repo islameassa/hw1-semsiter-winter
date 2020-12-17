@@ -75,18 +75,18 @@ include CMakeFiles/my_executable.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/my_executable.dir/flags.make
 
-CMakeFiles/my_executable.dir/tests/event_manager_example_tests.c.obj: CMakeFiles/my_executable.dir/flags.make
-CMakeFiles/my_executable.dir/tests/event_manager_example_tests.c.obj: ../tests/event_manager_example_tests.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\thoma\OneDrive\Documents\GitHub\hw1-semsiter-winter\event_manager\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/my_executable.dir/tests/event_manager_example_tests.c.obj"
-	C:\GCC\bin\x86_64-w64-mingw32-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\my_executable.dir\tests\event_manager_example_tests.c.obj -c C:\Users\thoma\OneDrive\Documents\GitHub\hw1-semsiter-winter\event_manager\tests\event_manager_example_tests.c
+CMakeFiles/my_executable.dir/em_test.c.obj: CMakeFiles/my_executable.dir/flags.make
+CMakeFiles/my_executable.dir/em_test.c.obj: ../em_test.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\thoma\OneDrive\Documents\GitHub\hw1-semsiter-winter\event_manager\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/my_executable.dir/em_test.c.obj"
+	C:\GCC\bin\x86_64-w64-mingw32-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\my_executable.dir\em_test.c.obj -c C:\Users\thoma\OneDrive\Documents\GitHub\hw1-semsiter-winter\event_manager\em_test.c
 
-CMakeFiles/my_executable.dir/tests/event_manager_example_tests.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/my_executable.dir/tests/event_manager_example_tests.c.i"
-	C:\GCC\bin\x86_64-w64-mingw32-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\thoma\OneDrive\Documents\GitHub\hw1-semsiter-winter\event_manager\tests\event_manager_example_tests.c > CMakeFiles\my_executable.dir\tests\event_manager_example_tests.c.i
+CMakeFiles/my_executable.dir/em_test.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/my_executable.dir/em_test.c.i"
+	C:\GCC\bin\x86_64-w64-mingw32-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\thoma\OneDrive\Documents\GitHub\hw1-semsiter-winter\event_manager\em_test.c > CMakeFiles\my_executable.dir\em_test.c.i
 
-CMakeFiles/my_executable.dir/tests/event_manager_example_tests.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/my_executable.dir/tests/event_manager_example_tests.c.s"
-	C:\GCC\bin\x86_64-w64-mingw32-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\thoma\OneDrive\Documents\GitHub\hw1-semsiter-winter\event_manager\tests\event_manager_example_tests.c -o CMakeFiles\my_executable.dir\tests\event_manager_example_tests.c.s
+CMakeFiles/my_executable.dir/em_test.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/my_executable.dir/em_test.c.s"
+	C:\GCC\bin\x86_64-w64-mingw32-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\thoma\OneDrive\Documents\GitHub\hw1-semsiter-winter\event_manager\em_test.c -o CMakeFiles\my_executable.dir\em_test.c.s
 
 CMakeFiles/my_executable.dir/date.c.obj: CMakeFiles/my_executable.dir/flags.make
 CMakeFiles/my_executable.dir/date.c.obj: ../date.c
@@ -140,27 +140,42 @@ CMakeFiles/my_executable.dir/member.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/my_executable.dir/member.c.s"
 	C:\GCC\bin\x86_64-w64-mingw32-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\thoma\OneDrive\Documents\GitHub\hw1-semsiter-winter\event_manager\member.c -o CMakeFiles\my_executable.dir\member.c.s
 
+CMakeFiles/my_executable.dir/priority_queue.c.obj: CMakeFiles/my_executable.dir/flags.make
+CMakeFiles/my_executable.dir/priority_queue.c.obj: ../priority_queue.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\thoma\OneDrive\Documents\GitHub\hw1-semsiter-winter\event_manager\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/my_executable.dir/priority_queue.c.obj"
+	C:\GCC\bin\x86_64-w64-mingw32-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\my_executable.dir\priority_queue.c.obj -c C:\Users\thoma\OneDrive\Documents\GitHub\hw1-semsiter-winter\event_manager\priority_queue.c
+
+CMakeFiles/my_executable.dir/priority_queue.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/my_executable.dir/priority_queue.c.i"
+	C:\GCC\bin\x86_64-w64-mingw32-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\thoma\OneDrive\Documents\GitHub\hw1-semsiter-winter\event_manager\priority_queue.c > CMakeFiles\my_executable.dir\priority_queue.c.i
+
+CMakeFiles/my_executable.dir/priority_queue.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/my_executable.dir/priority_queue.c.s"
+	C:\GCC\bin\x86_64-w64-mingw32-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\thoma\OneDrive\Documents\GitHub\hw1-semsiter-winter\event_manager\priority_queue.c -o CMakeFiles\my_executable.dir\priority_queue.c.s
+
 # Object files for target my_executable
 my_executable_OBJECTS = \
-"CMakeFiles/my_executable.dir/tests/event_manager_example_tests.c.obj" \
+"CMakeFiles/my_executable.dir/em_test.c.obj" \
 "CMakeFiles/my_executable.dir/date.c.obj" \
 "CMakeFiles/my_executable.dir/event_manager.c.obj" \
 "CMakeFiles/my_executable.dir/event.c.obj" \
-"CMakeFiles/my_executable.dir/member.c.obj"
+"CMakeFiles/my_executable.dir/member.c.obj" \
+"CMakeFiles/my_executable.dir/priority_queue.c.obj"
 
 # External object files for target my_executable
 my_executable_EXTERNAL_OBJECTS =
 
-my_executable.exe: CMakeFiles/my_executable.dir/tests/event_manager_example_tests.c.obj
+my_executable.exe: CMakeFiles/my_executable.dir/em_test.c.obj
 my_executable.exe: CMakeFiles/my_executable.dir/date.c.obj
 my_executable.exe: CMakeFiles/my_executable.dir/event_manager.c.obj
 my_executable.exe: CMakeFiles/my_executable.dir/event.c.obj
 my_executable.exe: CMakeFiles/my_executable.dir/member.c.obj
+my_executable.exe: CMakeFiles/my_executable.dir/priority_queue.c.obj
 my_executable.exe: CMakeFiles/my_executable.dir/build.make
 my_executable.exe: CMakeFiles/my_executable.dir/linklibs.rsp
 my_executable.exe: CMakeFiles/my_executable.dir/objects1.rsp
 my_executable.exe: CMakeFiles/my_executable.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\thoma\OneDrive\Documents\GitHub\hw1-semsiter-winter\event_manager\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking C executable my_executable.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\thoma\OneDrive\Documents\GitHub\hw1-semsiter-winter\event_manager\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking C executable my_executable.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\my_executable.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

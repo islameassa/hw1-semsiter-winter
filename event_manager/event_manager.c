@@ -105,7 +105,7 @@ static void freeDateGeneric(PQElementPriority date)
 
 static int compareDatesGeneric(PQElementPriority date1, PQElementPriority date2)
 {
-    return dateCompare((Date)date1, (Date)date2);
+    return (0 - dateCompare((Date)date1, (Date)date2));
 }
 
 EventManager createEventManager(Date date)
@@ -212,6 +212,11 @@ EventManagerResult emAddEventByDiff(EventManager em, char *event_name, int days,
     if (em == NULL)
     {
         return EM_NULL_ARGUMENT;
+    }
+
+    if (days < 0)
+    {
+        return EM_INVALID_DATE;
     }
 
     Date new_date = dateCopy(em->date);
@@ -492,10 +497,10 @@ char *emGetNextEvent(EventManager em)
     return eventGetName(tmp);
 }
 
-void emPrintAllEvents(EventManager em, const char* file_name)
+void emPrintAllEvents(EventManager em, const char *file_name)
 {
     FILE *file = fopen(file_name, "w");
-    if(file == NULL)
+    if (file == NULL)
     {
         return;
     }
@@ -508,10 +513,10 @@ void emPrintAllEvents(EventManager em, const char* file_name)
     fclose(file);
 }
 
-void emPrintAllResponsibleMembers(EventManager em, const char* file_name)
+void emPrintAllResponsibleMembers(EventManager em, const char *file_name)
 {
     FILE *file = fopen(file_name, "w");
-    if(file == NULL)
+    if (file == NULL)
     {
         return;
     }
