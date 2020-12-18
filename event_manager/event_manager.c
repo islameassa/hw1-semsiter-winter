@@ -309,8 +309,20 @@ EventManagerResult emChangeEventDate(EventManager em, int event_id, Date new_dat
         return EM_EVENT_ALREADY_EXISTS;
     }
 
-    if (pqChangePriority(em->events, tmp, eventGetDate(tmp), new_date) == PQ_OUT_OF_MEMORY ||
-        eventChangeDate(tmp, new_date) == EVENT_OUT_OF_MEMORY)
+    PriorityQueueResult result2 = pqChangePriority(em->events, tmp, eventGetDate(tmp), new_date);
+    if (result2 == PQ_OUT_OF_MEMORY)
+    {
+        return EM_OUT_OF_MEMORY;
+    }
+
+    tmp = getEventById(em->events, event_id);
+    if (tmp == NULL)
+    {
+        return EM_EVENT_ID_NOT_EXISTS;
+    }
+
+    EventResult result = eventChangeDate(tmp, new_date);
+    if (result == EVENT_OUT_OF_MEMORY)
     {
         return EM_OUT_OF_MEMORY;
     }
@@ -348,6 +360,7 @@ EventManagerResult emAddMember(EventManager em, char *member_name, int member_id
         return EM_OUT_OF_MEMORY;
     }
 
+    memberDestroy(new_member);
     return EM_SUCCESS;
 }
 
@@ -393,7 +406,11 @@ EventManagerResult emAddMemberToEvent(EventManager em, int member_id, int event_
         return EM_OUT_OF_MEMORY;
     }
 
-    memberChangeEventNumber(member_tmp, memberGetEventNumber(member_tmp) + 1);
+    Member member_copy = memberCopy(member_tmp);
+    pqRemoveElement(em->members, member_tmp);
+    memberChangeEventNumber(member_copy, memberGetEventNumber(member_copy) + 1);
+    pqInsert(em->members, member_copy, member_copy);
+    memberDestroy(member_copy);
     return EM_SUCCESS;
 }
 

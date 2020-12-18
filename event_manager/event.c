@@ -229,6 +229,7 @@ EventResult eventChangeDate(Event event, Date date)
         return EVENT_OUT_OF_MEMORY;
     }
 
+    dateDestroy(event->date);
     event->date = new_date;
     return EVENT_SUCCESS;
 }
