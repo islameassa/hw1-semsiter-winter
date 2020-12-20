@@ -1,3 +1,0 @@
-C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/event_manager/build/CMakeFiles/my_executable.dir
-C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/event_manager/build/CMakeFiles/edit_cache.dir
-C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/event_manager/build/CMakeFiles/rebuild_cache.dir

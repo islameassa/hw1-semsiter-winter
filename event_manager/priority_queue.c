@@ -192,7 +192,6 @@ bool pqContains(PriorityQueue queue, PQElement element)
     return find(queue, element) == ELEMENT_NOT_FOUND ? false : true;
 }
 
-// putting the big priority first
 PriorityQueueResult pqInsert(PriorityQueue queue, PQElement element,
                              PQElementPriority priority)
 {
@@ -381,7 +380,6 @@ PQElement pqGetFirst(PriorityQueue queue)
     return pqGetNext(queue);
 }
 
-// Get next set element
 PQElement pqGetNext(PriorityQueue queue)
 {
     if (queue == NULL)

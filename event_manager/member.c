@@ -1,13 +1,8 @@
-
 #include <assert.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include "member.h"
-
-#define MEMBER_NULL_ARGUMENT -1
-#define MEMBERS_NOT_EQUAL 1
-#define MEMBERS_EQUAL 0
 
 struct Member_t
 {

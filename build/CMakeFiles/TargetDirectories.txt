@@ -1,5 +1,0 @@
-C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/build/CMakeFiles/my_executable.dir
-C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/build/CMakeFiles/package.dir
-C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/build/CMakeFiles/package_source.dir
-C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/build/CMakeFiles/edit_cache.dir
-C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/build/CMakeFiles/rebuild_cache.dir

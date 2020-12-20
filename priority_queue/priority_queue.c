@@ -192,7 +192,6 @@ bool pqContains(PriorityQueue queue, PQElement element)
     return find(queue, element) == ELEMENT_NOT_FOUND ? false : true;
 }
 
-// putting the big priority first
 PriorityQueueResult pqInsert(PriorityQueue queue, PQElement element,
                              PQElementPriority priority)
 {
@@ -347,8 +346,10 @@ PriorityQueueResult pqChangePriority(PriorityQueue queue, PQElement element,
         return PQ_ELEMENT_DOES_NOT_EXISTS;
     }
 
+    PQElement element_tmp = queue->copy_element(element);
     pqRemoveElementByIndex(queue, index);
-    pqInsert(queue, element, new_priority);
+    pqInsert(queue, element_tmp, new_priority);
+    queue->free_element(element_tmp);
     return PQ_SUCCESS;
 }
 
@@ -379,7 +380,6 @@ PQElement pqGetFirst(PriorityQueue queue)
     return pqGetNext(queue);
 }
 
-// Get next set element
 PQElement pqGetNext(PriorityQueue queue)
 {
     if (queue == NULL)

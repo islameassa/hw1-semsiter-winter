@@ -121,14 +121,16 @@ EventManager createEventManager(Date date)
         return NULL;
     }
 
-    em->events = pqCreate(copyEventGeneric, freeEventGeneric, compareEventsGeneric, copyDateGeneric, freeDateGeneric, compareDatesGeneric);
+    em->events = pqCreate(copyEventGeneric, freeEventGeneric, compareEventsGeneric,
+                          copyDateGeneric, freeDateGeneric, compareDatesGeneric);
     if (em->events == NULL)
     {
         free(em);
         return NULL;
     }
 
-    em->members = pqCreate(copyMemberGeneric, freeMemberGeneric, compareMembersGeneric, copyMemberGeneric, freeMemberGeneric, compareMemberPriorities);
+    em->members = pqCreate(copyMemberGeneric, freeMemberGeneric, compareMembersGeneric,
+                           copyMemberGeneric, freeMemberGeneric, compareMemberPriorities);
     if (em->members == NULL)
     {
         pqDestroy(em->events);

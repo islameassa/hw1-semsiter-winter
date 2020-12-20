@@ -1,7 +1,0 @@
-[
-{
-  "directory": "C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/member/build",
-  "command": "C:\\GCC\\bin\\x86_64-w64-mingw32-gcc.exe   -std=c99 --pedantic-errors -Wall -Werror -g -o CMakeFiles\\my_executable.dir\\member.c.obj -c C:\\Users\\thoma\\OneDrive\\Documents\\GitHub\\hw1-semsiter-winter\\member\\member.c",
-  "file": "C:/Users/thoma/OneDrive/Documents/GitHub/hw1-semsiter-winter/member/member.c"
-}
-]

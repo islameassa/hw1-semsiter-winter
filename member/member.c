@@ -1,18 +1,14 @@
-
 #include <assert.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include "member.h"
 
-#define MEMBER_NULL_ARGUMENT -1
-#define MEMBERS_NOT_EQUAL 1
-#define MEMBERS_EQUAL 0
-
 struct Member_t
 {
     int id;
     char *name;
+    int event_number;
 };
 
 static char *copyString(char *string)
@@ -26,7 +22,7 @@ static char *copyString(char *string)
     return new_string;
 }
 
-Member createMember(int id, char *name)
+Member memberCreate(int id, char *name)
 {
     if (name == NULL)
     {
@@ -38,20 +34,21 @@ Member createMember(int id, char *name)
         return NULL;
     }
     char *new_name = copyString(name);
-    if(new_name == NULL)
+    if (new_name == NULL)
     {
         free(member);
         return NULL;
     }
     member->id = id;
     member->name = new_name;
+    member->event_number = 0;
 
     return member;
 }
 
 void memberDestroy(Member member)
 {
-    if(member == NULL)
+    if (member == NULL)
     {
         return;
     }
@@ -71,6 +68,8 @@ Member memberCopy(Member member)
     {
         return NULL;
     }
+    new_member->event_number = member->event_number;
+
     return new_member;
 }
 
@@ -83,16 +82,43 @@ char *memberGetName(Member member)
     return member->name;
 }
 
-int memberCompare(Member member1, Member member2)
+int memberGetId(Member member)
 {
+    if (member == NULL)
+    {
+        return -1;
+    }
+    return member->id;
+}
 
-    if (member1 == NULL || member2 == NULL)
+int memberGetEventNumber(Member member)
+{
+    if (member == NULL)
     {
-        return MEMBER_NULL_ARGUMENT;
+        return -1;
     }
-    if(member1->id == member2->id)
+    return member->event_number;
+}
+
+void memberChangeEventNumber(Member member, int new_event_number)
+{
+    if (member == NULL)
     {
-        return MEMBERS_EQUAL;
+        return;
     }
-    return MEMBERS_NOT_EQUAL;
+    member->event_number = new_event_number;
+}
+
+bool memberCompare(Member member1, Member member2)
+{
+    if(member1 == NULL || member2 == NULL)
+    {
+        return NULL;
+    }
+    return (member1->id - member2->id == 0) ? true : false;
+}
+
+void memberPrint(Member member, FILE *file)
+{
+    fprintf(file, "%s,%d", member->name, member->event_number);
 }

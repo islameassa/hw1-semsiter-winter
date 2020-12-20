@@ -18,12 +18,16 @@
 *   eventDestroy        - Deallocates an existing event.
 *   eventCopy           - Creates a copy of target event.
 *                           Iterator values for both events are undefined after this operation.
-*   eventGetName        - Returns the name of the event
+*   eventGetName        - Returns the name of the event.
+*   eventGetId          - Returns the ID of the event.
+*   eventGetDate        - Returns the date of the event.
 *   eventEquals         - Checks if two events are equals.
 *   eventAddMember      - add a member for the event.
 *                           Iterator's value is undefined after this operation.
-*   eventRemoveMember   - Removes the member from the event
+*   eventRemoveMember   - Removes the member from the event.
 *                           Iterator's value is undefined after this operation.
+*   eventChangeDate     - Changes the event's date.
+*   eventPrint          - Prints the details of the event.
 *   eventGetFirst       - Sets the internal iterator to the first member in the event.
 *   eventGetNext        - Advances the event iterator to the next member and returns it.
 * 	PQ_FOREACH	        - A macro for iterating over the event's members.
@@ -47,9 +51,9 @@ typedef enum EventResult_t
 /**
 * eventCreate: Allocates a new event.
 *
-* @param id - The ID number of the event
-* @param name - The name of the event
-* @param date - The date of the event
+* @param id - The ID number of the event.
+* @param name - The name of the event.
+* @param date - The date of the event.
 *
 * @return
 * 	NULL - if one of the parameters is NULL or allocations failed.
@@ -61,13 +65,13 @@ Event eventCreate(int id, char *name, Date date);
 * eventDestroy: Deallocates an existing event.
 *
 * @param event - Target event to be deallocated. If event is NULL nothing will be
-* 		done
+* 		done.
 */
 void eventDestroy(Event event);
 
 /**
 * eventCopy: Creates a copy of target event.
-* Iterator values for both events are undefined after this operation.
+*   Iterator values for both events are undefined after this operation.
 *
 * @param event - Target event.
 * @return
@@ -77,8 +81,8 @@ void eventDestroy(Event event);
 Event eventCopy(Event event);
 
 /**
-* eventGetName: Returns the name of the event
-* @param event - The event which name is requested
+* eventGetName: Returns the name of the event.
+* @param event - The event which name is requested.
 * @return
 * 	NULL if a NULL pointer was sent.
 * 	Otherwise the name of the event.
@@ -86,8 +90,8 @@ Event eventCopy(Event event);
 char *eventGetName(Event event);
 
 /**
-* eventGetId: Returns the ID of the event
-* @param event - The event which ID is requested
+* eventGetId: Returns the ID of the event.
+* @param event - The event which ID is requested.
 * @return
 * 	-1 if a NULL pointer was sent.
 * 	Otherwise the ID of the event.
@@ -95,8 +99,8 @@ char *eventGetName(Event event);
 int eventGetId(Event event);
 
 /**
-* eventGetDate: Returns the date of the event
-* @param event - The event which date is requested
+* eventGetDate: Returns the date of the event.
+* @param event - The event which date is requested.
 * @return
 * 	NULL if a NULL pointer was sent.
 * 	Otherwise the date of the event.
@@ -104,9 +108,9 @@ int eventGetId(Event event);
 Date eventGetDate(Event event);
 
 /**
-*   eventEquals: Checks if two events are equals.
+* eventEquals: Checks if two events are equals.
 *
-* @param event1 - The first event to compare
+* @param event1 - The first event to compare.
 * @param event2 - The second event to compare.
 *
 * @return
@@ -116,21 +120,21 @@ Date eventGetDate(Event event);
 bool eventEquals(Event event1, Event event2);
 
 /**
-*   eventAddMember: add a member for the event.
+* eventAddMember: add a member for the event.
 *   Iterator's value is undefined after this operation.
 *
-* @param event - The event for which to add the member
+* @param event - The event for which to add the member.
 * @param member - The member which need to be added.
 *      A copy of the member will be inserted.
 * @return
-* 	EVENT_NULL_ARGUMENT if a NULL was sent as one of the parameters
-* 	EVENT_OUT_OF_MEMORY if an allocation failed
-* 	EVENT_SUCCESS the member had been added successfully
+* 	EVENT_NULL_ARGUMENT if a NULL was sent as one of the parameters.
+* 	EVENT_OUT_OF_MEMORY if an allocation failed.
+* 	EVENT_SUCCESS the member had been added successfully.
 */
 EventResult eventAddMember(Event event, Member member);
 
 /**
-*   eventRemoveMember: Removes the member from the event
+* eventRemoveMember: Removes the member from the event.
 *   Iterator's value is undefined after this operation.
 *
 * @param event - The event to remove the member from.
@@ -143,10 +147,10 @@ EventResult eventAddMember(Event event, Member member);
 EventResult eventRemoveMember(Event event, Member member);
 
 /**
-*   eventChangeDate: Changes the event's date
+* eventChangeDate: Changes the event's date.
 *
 * @param event - The event which date should be changed.
-* @param date - The new date for the event
+* @param date - The new date for the event.
 *
 * @return
 * 	EVENT_NULL_ARGUMENT if a NULL was sent to the function.
@@ -156,7 +160,7 @@ EventResult eventRemoveMember(Event event, Member member);
 EventResult eventChangeDate(Event event, Date date);
 
 /**
-*   eventPrint: Prints the details of the event.
+* eventPrint: Prints the details of the event.
 *
 * @param event - The event which details should be printed.
 * @param file - pointer to the output file.
@@ -164,7 +168,7 @@ EventResult eventChangeDate(Event event, Date date);
 void eventPrint(Event event, FILE *file);
 
 /**
-*	eventGetFirst: Sets the internal iterator (also called current member) to
+* eventGetFirst: Sets the internal iterator (also called current member) to
 *	the first member in the event.
 *	Use this to start iterating over the event members.
 *	To continue iteration use eventGetNext.
@@ -172,18 +176,18 @@ void eventPrint(Event event, FILE *file);
 * @param event - The event for which to set the iterator and return the first member.
 * @return
 * 	NULL if a NULL pointer was sent or the event is empty.
-* 	The first member of the event otherwise
+* 	The first member of the event otherwise.
 */
 Member eventGetFirst(Event event);
 
 /**
-*	eventGetNext: Advances the event iterator to the next member and returns it.
+* eventGetNext: Advances the event iterator to the next member and returns it.
 *
-* @param event - The event for which to advance the iterator
+* @param event - The event for which to advance the iterator.
 * @return
 * 	NULL if reached the end of the event members, or the iterator is at an invalid state
-* 	or a NULL sent as argument
-* 	The next member on the event in case of success
+* 	or a NULL sent as argument.
+* 	The next member on the event in case of success.
 */
 Member eventGetNext(Event event);
 
