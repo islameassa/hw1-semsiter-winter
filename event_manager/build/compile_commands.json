@@ -1,0 +1,32 @@
+[
+{
+  "directory": "C:/Users/islam/Desktop/hw1Desktop/event_manager/build",
+  "command": "C:\\TDM-GCC-64\\bin\\gcc.exe   -std=c99 --pedantic-errors -Wall -Werror -g   -o CMakeFiles\\my_executable.dir\\em_test.c.obj   -c C:\\Users\\islam\\Desktop\\hw1Desktop\\event_manager\\em_test.c",
+  "file": "C:/Users/islam/Desktop/hw1Desktop/event_manager/em_test.c"
+},
+{
+  "directory": "C:/Users/islam/Desktop/hw1Desktop/event_manager/build",
+  "command": "C:\\TDM-GCC-64\\bin\\gcc.exe   -std=c99 --pedantic-errors -Wall -Werror -g   -o CMakeFiles\\my_executable.dir\\date.c.obj   -c C:\\Users\\islam\\Desktop\\hw1Desktop\\event_manager\\date.c",
+  "file": "C:/Users/islam/Desktop/hw1Desktop/event_manager/date.c"
+},
+{
+  "directory": "C:/Users/islam/Desktop/hw1Desktop/event_manager/build",
+  "command": "C:\\TDM-GCC-64\\bin\\gcc.exe   -std=c99 --pedantic-errors -Wall -Werror -g   -o CMakeFiles\\my_executable.dir\\event_manager.c.obj   -c C:\\Users\\islam\\Desktop\\hw1Desktop\\event_manager\\event_manager.c",
+  "file": "C:/Users/islam/Desktop/hw1Desktop/event_manager/event_manager.c"
+},
+{
+  "directory": "C:/Users/islam/Desktop/hw1Desktop/event_manager/build",
+  "command": "C:\\TDM-GCC-64\\bin\\gcc.exe   -std=c99 --pedantic-errors -Wall -Werror -g   -o CMakeFiles\\my_executable.dir\\event.c.obj   -c C:\\Users\\islam\\Desktop\\hw1Desktop\\event_manager\\event.c",
+  "file": "C:/Users/islam/Desktop/hw1Desktop/event_manager/event.c"
+},
+{
+  "directory": "C:/Users/islam/Desktop/hw1Desktop/event_manager/build",
+  "command": "C:\\TDM-GCC-64\\bin\\gcc.exe   -std=c99 --pedantic-errors -Wall -Werror -g   -o CMakeFiles\\my_executable.dir\\member.c.obj   -c C:\\Users\\islam\\Desktop\\hw1Desktop\\event_manager\\member.c",
+  "file": "C:/Users/islam/Desktop/hw1Desktop/event_manager/member.c"
+},
+{
+  "directory": "C:/Users/islam/Desktop/hw1Desktop/event_manager/build",
+  "command": "C:\\TDM-GCC-64\\bin\\gcc.exe   -std=c99 --pedantic-errors -Wall -Werror -g   -o CMakeFiles\\my_executable.dir\\priority_queue.c.obj   -c C:\\Users\\islam\\Desktop\\hw1Desktop\\event_manager\\priority_queue.c",
+  "file": "C:/Users/islam/Desktop/hw1Desktop/event_manager/priority_queue.c"
+}
+]

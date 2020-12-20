@@ -4,6 +4,8 @@
 #include <string.h>
 #include "member.h"
 
+#define NULL_MEMBER -1
+
 struct Member_t
 {
     int id;
@@ -86,7 +88,7 @@ int memberGetId(Member member)
 {
     if (member == NULL)
     {
-        return -1;
+        return NULL_MEMBER;
     }
     return member->id;
 }
@@ -95,7 +97,7 @@ int memberGetEventNumber(Member member)
 {
     if (member == NULL)
     {
-        return -1;
+        return NULL_MEMBER;
     }
     return member->event_number;
 }

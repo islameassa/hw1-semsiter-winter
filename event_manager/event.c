@@ -5,6 +5,8 @@
 #include <string.h>
 #include <assert.h>
 
+#define NULL_EVENT -1
+
 struct Event_t
 {
     int id;
@@ -161,7 +163,7 @@ int eventGetId(Event event)
 {
     if (event == NULL)
     {
-        return -1;
+        return NULL_EVENT;
     }
     return event->id;
 }

@@ -7,6 +7,8 @@
 #include <string.h>
 #include <assert.h>
 
+#define NULL_EM -1
+
 struct EventManager_t
 {
     Date date;
@@ -500,7 +502,7 @@ int emGetEventsAmount(EventManager em)
 {
     if (em == NULL)
     {
-        return -1;
+        return NULL_EM;
     }
     return pqGetSize(em->events);
 }
